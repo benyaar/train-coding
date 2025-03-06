@@ -1,0 +1,22 @@
+{
+	"Expanded Form Comments": {
+	  "prefix": "c", 
+	  "body": [
+		"/**",
+		" * ${1:Enter task name},",
+		" *", 
+		"*/",
+		"",
+		"// Simple solution",
+		"",
+		"",
+		"// Best solution",
+		"",
+		"",
+		"// Tests",
+		""
+	  ],
+	  "description": "Comments template for expanded form function"
+	}
+  }
+  

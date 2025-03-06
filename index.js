@@ -41,3 +41,4 @@ describe(" Write Number in Expanded Form", () => {
     assert.strictEqual(expandedForm2(70304), '70000 + 300 + 4');
   });
 });
+

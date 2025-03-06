@@ -53,7 +53,7 @@ function flatten(arr) {
 
     arr.forEach(item => {
         if (Array.isArray(item)) {
-            result = result.concat(flatten(item)); 
+            result.push(...flatten(item)); 
         } else {
             result.push(item); 
         }
@@ -74,3 +74,24 @@ describe("Flatten", () => {
         assert.deepEqual(flatten2([1, [2, 3, [4, 5]], 6]), [1, 2, 3, 4, 5, 6]);
     });
 });
+
+/**
+ * Extract the domain name from a URL
+ *
+*/
+
+// Simple solution
+function domainName(url){
+    return url.replace('http://', '').replace('https://', '').replace('www.', '').split('.')[0]
+ }
+
+
+// Tests
+describe("Extract the domain name from a URL", () => {
+    it("Extract the domain name from a URL", () => {
+      assert.equal(domainName("http://google.com"), "google");
+      assert.equal(domainName("http://google.co.jp"), "google");
+      assert.equal(domainName("https://youtube.com"), "youtube");
+      assert.equal(domainName("www.xakep.ru"), "xakep");
+    })  
+  })

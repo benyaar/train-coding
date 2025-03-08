@@ -162,7 +162,7 @@ describe("Directions Reduction", () => {
 */
 
 // Simple solution
-function maxSequence(arr){
+function maxSequence(arr) {
     let max = 0
     for (let i = 0; i < arr.length; i++) {
         const neArr = []
@@ -174,25 +174,25 @@ function maxSequence(arr){
                     let sum = neArr.reduce((acc, el) => {
                         return acc + el
                     }, 0)
-                    if(sum > max) max = sum
-                
+                    if (sum > max) max = sum
+
                 }
             }
         }
     }
     arr.push(max)
-    return  Math.max(...arr)
+    return Math.max(...arr)
 }
 
 // Best solution
-function maxSequence2(arr){
-  var min = 0, ans = 0, i, sum = 0;
-  for (i = 0; i < arr.length; ++i) {
-    sum += arr[i];
-    min = Math.min(sum, min);
-    ans = Math.max(ans, sum - min);
-  }
-  return ans;
+function maxSequence2(arr) {
+    var min = 0, ans = 0, i, sum = 0;
+    for (i = 0; i < arr.length; ++i) {
+        sum += arr[i];
+        min = Math.min(sum, min);
+        ans = Math.max(ans, sum - min);
+    }
+    return ans;
 }
 
 // Tests
@@ -204,5 +204,54 @@ describe("Maximum subarray sum", function () {
     it("Maximum subarray sum2", function () {
         assert.strictEqual(maxSequence2([]), 0);
         assert.strictEqual(maxSequence2([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6);
+    });
+});
+/**
+ * String incrementer
+ * Your job is to write a function which increments a string, to create a new string.
+ * If the string already ends with a number, the number should be incremented by 1.
+ * If the string does not end with a number. the number 1 should be appended to the new string.
+ * Examples:
+ * foo -> foo1
+ * foobar23 -> foobar24
+ * foo0042 -> foo0043
+ * foo9 -> foo10
+ * foo099 -> foo100,
+ *
+*/
+
+// Simple solution
+function incrementString(str) {
+    let match = str.match(/\d+$/);
+    let num = match ? String(Number(match[0]) + 1).padStart(match[0].length, '0') : '1';
+    return match ? str.replace(/\d+$/, num) : str + num;
+}
+
+// Best solution
+let incrementString2 = str => str.replace(/([0-8]|\d?9+)?$/, (e) => e ? + e + 1 : 1)
+
+// Tests
+describe("String incrementer", function () {
+    it("incrementString1", function () {
+        assert.strictEqual(incrementString("foobar999"), "foobar1000");
+        assert.strictEqual(incrementString("foobar000"), "foobar001");
+        assert.strictEqual(incrementString("foobar00999"), "foobar01000");
+        assert.strictEqual(incrementString("foo"), "foo1");
+        assert.strictEqual(incrementString("foobar001"), "foobar002");
+        assert.strictEqual(incrementString("foobar1"), "foobar2");
+        assert.strictEqual(incrementString("1"), "2");
+        assert.strictEqual(incrementString("009"), "010");
+        assert.strictEqual(incrementString("fo99obar99"), "fo99obar100");
+    });
+    it("incrementString2", function () {
+        assert.strictEqual(incrementString2("foobar000"), "foobar001");
+        assert.strictEqual(incrementString2("foobar999"), "foobar1000");
+        assert.strictEqual(incrementString2("foobar00999"), "foobar01000");
+        assert.strictEqual(incrementString2("foo"), "foo1");
+        assert.strictEqual(incrementString2("foobar001"), "foobar002");
+        assert.strictEqual(incrementString2("foobar1"), "foobar2");
+        assert.strictEqual(incrementString2("1"), "2");
+        assert.strictEqual(incrementString2("009"), "010");
+        assert.strictEqual(incrementString2("fo99obar99"), "fo99obar100");
     });
 });

@@ -163,11 +163,37 @@ describe("Directions Reduction", () => {
 
 // Simple solution
 function maxSequence(arr){
-    // ...
+    let max = 0
+    for (let i = 0; i < arr.length; i++) {
+        const neArr = []
+        if (arr[i] > 0) {
+            neArr.push(arr[i])
+            for (let j = i + 1; j < arr.length; j++) {
+                if (neArr.length >= 1) {
+                    neArr.push(arr[j])
+                    let sum = neArr.reduce((acc, el) => {
+                        return acc + el
+                    }, 0)
+                    if(sum > max) max = sum
+                
+                }
+            }
+        }
+    }
+    arr.push(max)
+    return  Math.max(...arr)
 }
 
 // Best solution
-
+function maxSequence2(arr){
+  var min = 0, ans = 0, i, sum = 0;
+  for (i = 0; i < arr.length; ++i) {
+    sum += arr[i];
+    min = Math.min(sum, min);
+    ans = Math.max(ans, sum - min);
+  }
+  return ans;
+}
 
 // Tests
 describe("Maximum subarray sum", function () {
@@ -176,7 +202,7 @@ describe("Maximum subarray sum", function () {
         assert.strictEqual(maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6);
     });
     it("Maximum subarray sum2", function () {
-        assert.strictEqual(maxSequence([]), 0);
-        assert.strictEqual(maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6);
+        assert.strictEqual(maxSequence2([]), 0);
+        assert.strictEqual(maxSequence2([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6);
     });
 });

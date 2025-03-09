@@ -255,3 +255,48 @@ describe("String incrementer", function () {
         assert.strictEqual(incrementString2("fo99obar99"), "fo99obar100");
     });
 });
+/**
+ * Enter task name,
+ *Given two arrays of strings a1 and a2 return a sorted array r in lexicographical order of the strings of a1 which are substrings of strings of a2.
+*/
+
+// Simple solution
+function inArray(array1,array2){
+    return array1.filter(e => array2.some(word => word.includes(e))).sort();
+}
+// Best solution
+function inArray2(array1,array2){
+    return array1
+      .filter(a1 => array2.find(a2 => a2.match(a1)))
+      .sort()
+  }
+
+// Tests
+describe("Which are in?", () => {
+    it("Which are in?1", () => {
+      
+      let a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+  
+      let a1 = ["xyz", "live", "strong"]
+      assert.sameOrderedMembers(inArray(a1, a2), ["live", "strong"])
+  
+      a1 = ["live", "strong", "arp"]
+      assert.sameOrderedMembers(inArray(a1, a2), ["arp", "live", "strong"])
+  
+      a1 = ["tarp", "mice", "bull"]
+      assert.sameOrderedMembers(inArray(a1, a2), [])
+    });
+    it("Which are in?2", () => {
+      
+        let a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+    
+        let a1 = ["xyz", "live", "strong"]
+        assert.sameOrderedMembers(inArray2(a1, a2), ["live", "strong"])
+    
+        a1 = ["live", "strong", "arp"]
+        assert.sameOrderedMembers(inArray2(a1, a2), ["arp", "live", "strong"])
+    
+        a1 = ["tarp", "mice", "bull"]
+        assert.sameOrderedMembers(inArray2(a1, a2), [])
+      });
+  });

@@ -261,52 +261,52 @@ describe("String incrementer", function () {
 */
 
 // Simple solution
-function inArray(array1,array2){
+function inArray(array1, array2) {
     return array1.filter(e => array2.some(word => word.includes(e))).sort();
 }
 // Best solution
-function inArray2(array1,array2){
+function inArray2(array1, array2) {
     return array1
-      .filter(a1 => array2.find(a2 => a2.match(a1)))
-      .sort()
-  }
+        .filter(a1 => array2.find(a2 => a2.match(a1)))
+        .sort()
+}
 
 // Tests
 describe("Which are in?", () => {
     it("Which are in?1", () => {
-      
-      let a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
-  
-      let a1 = ["xyz", "live", "strong"]
-      assert.sameOrderedMembers(inArray(a1, a2), ["live", "strong"])
-  
-      a1 = ["live", "strong", "arp"]
-      assert.sameOrderedMembers(inArray(a1, a2), ["arp", "live", "strong"])
-  
-      a1 = ["tarp", "mice", "bull"]
-      assert.sameOrderedMembers(inArray(a1, a2), [])
+
+        let a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+
+        let a1 = ["xyz", "live", "strong"]
+        assert.sameOrderedMembers(inArray(a1, a2), ["live", "strong"])
+
+        a1 = ["live", "strong", "arp"]
+        assert.sameOrderedMembers(inArray(a1, a2), ["arp", "live", "strong"])
+
+        a1 = ["tarp", "mice", "bull"]
+        assert.sameOrderedMembers(inArray(a1, a2), [])
     });
     it("Which are in?2", () => {
-      
+
         let a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
-    
+
         let a1 = ["xyz", "live", "strong"]
         assert.sameOrderedMembers(inArray2(a1, a2), ["live", "strong"])
-    
+
         a1 = ["live", "strong", "arp"]
         assert.sameOrderedMembers(inArray2(a1, a2), ["arp", "live", "strong"])
-    
+
         a1 = ["tarp", "mice", "bull"]
         assert.sameOrderedMembers(inArray2(a1, a2), [])
-      });
-  });
-  /**
-   * Roman Numerals Encoder
-   *
-  */
-  
-  // Simple solution
-  function solution(n) {
+    });
+});
+/**
+ * Roman Numerals Encoder
+ *
+*/
+
+// Simple solution
+function solution(n) {
     const dictionary = {
         1: 'I', 4: 'IV', 5: 'V', 9: 'IX',
         10: 'X', 40: 'XL', 50: 'L', 90: 'XC',
@@ -326,27 +326,70 @@ describe("Which are in?", () => {
     return result;
 }
 
-  // Tests
-  describe("Roman Numerals Encoder", function(){
-    it ("should handle small numbers", function(){
-      assert.strictEqual(solution(1), 'I', '1 should return "I"')
-      assert.strictEqual(solution(2), 'II', '2 should return "II"')
-      assert.strictEqual(solution(3), 'III', '3 should return "III"')
-      assert.strictEqual(solution(4), 'IV', '4 should return "IV"')
-      assert.strictEqual(solution(5), 'V', '5 should return "V"')
-      assert.strictEqual(solution(9), 'IX', '9 should return "IX"')
-      assert.strictEqual(solution(10), 'X', '10 should return "X"')
-      assert.strictEqual(solution(11), 'XI', '11 should return "XI"')
-      assert.strictEqual(solution(19), 'XIX', '19 should return "XIX"')
-      assert.strictEqual(solution(22), 'XXII', '22 should return "XXII"')
-      assert.strictEqual(solution(15), 'XV', '15 should return "XV"')
+// Tests
+describe("Roman Numerals Encoder", function () {
+    it("should handle small numbers", function () {
+        assert.strictEqual(solution(1), 'I', '1 should return "I"')
+        assert.strictEqual(solution(2), 'II', '2 should return "II"')
+        assert.strictEqual(solution(3), 'III', '3 should return "III"')
+        assert.strictEqual(solution(4), 'IV', '4 should return "IV"')
+        assert.strictEqual(solution(5), 'V', '5 should return "V"')
+        assert.strictEqual(solution(9), 'IX', '9 should return "IX"')
+        assert.strictEqual(solution(10), 'X', '10 should return "X"')
+        assert.strictEqual(solution(11), 'XI', '11 should return "XI"')
+        assert.strictEqual(solution(19), 'XIX', '19 should return "XIX"')
+        assert.strictEqual(solution(22), 'XXII', '22 should return "XXII"')
+        assert.strictEqual(solution(15), 'XV', '15 should return "XV"')
     });
-    
-    it ("should handle large numbers", function(){
-      assert.strictEqual(solution(1000), 'M', '1000 should, "M"')
-      assert.strictEqual(solution(1001), 'MI', '1001 should, "MI"')
-      assert.strictEqual(solution(1990), 'MCMXC', '1990 should, "MCMXC"')
-      assert.strictEqual(solution(2007), 'MMVII', '2007 should, "MMVII"')
-      assert.strictEqual(solution(2008), 'MMVIII', '2008 should, "MMVIII"')
+
+    it("should handle large numbers", function () {
+        assert.strictEqual(solution(1000), 'M', '1000 should, "M"')
+        assert.strictEqual(solution(1001), 'MI', '1001 should, "MI"')
+        assert.strictEqual(solution(1990), 'MCMXC', '1990 should, "MCMXC"')
+        assert.strictEqual(solution(2007), 'MMVII', '2007 should, "MMVII"')
+        assert.strictEqual(solution(2008), 'MMVIII', '2008 should, "MMVIII"')
     });
-  });
+});
+
+/**
+ *Are we alternate? 
+ * Create a function that accepts a string as an argument and validates whether the vowels (a, e, i, o, u) and consonants are in alternate order.
+*/
+
+// Simple solution
+function isAlt(word) {
+    const dictionary = new Set(['a', 'e', 'i', 'o', 'u'])
+    for (let i = 1; i < word.length; i++) {
+        const prev = dictionary.has(word[i - 1])
+        const cur = dictionary.has(word[i])
+
+        if (prev === cur) {
+            return false
+        }
+    }
+    return true;
+}
+
+// Best solution
+function isAlt2(word) {
+    return !/[aeiou]{2}|[^aeiou]{2}/.test(word);
+}
+
+// Tests
+describe("Are we alternate? ", function () {
+    it("Are we alternate?1", function () {
+        assert.strictEqual(isAlt('amazon'), true)
+        assert.strictEqual(isAlt('apple'), false)
+        assert.strictEqual(isAlt('banana'), true)
+        assert.strictEqual(isAlt('a'), true)
+        assert.strictEqual(isAlt('ee'), false)
+    });
+
+    it("Are we alternate?2", function () {
+        assert.strictEqual(isAlt2('amazon'), true)
+        assert.strictEqual(isAlt2('apple'), false)
+        assert.strictEqual(isAlt2('banana'), true)
+        assert.strictEqual(isAlt2('a'), true)
+        assert.strictEqual(isAlt2('ee'), false)
+    });
+});

@@ -393,3 +393,32 @@ describe("Are we alternate? ", function () {
         assert.strictEqual(isAlt2('ee'), false)
     });
 });
+
+/**
+ * Counting Change Combinations
+ * Write a function that counts how many different ways you can make change for an amount of money, given an array of coin denominations. 
+ * For example, there are 3 ways to give change for 4 if you have coins with denomination 1 and 2:
+ * 1+1+1+1, 1+1+2, 2+2.
+ *
+*/
+
+// Simple solution
+function countChange(money, coins) {
+    if(money === 0) return 1
+    if(money < 0 || !coins.length) return 0
+    return countChange (money -  coins[0], coins) + countChange (money, coins.slice(1))
+
+  }
+// Tests
+const test = (money, coins, expected) => {
+    assert.strictEqual(countChange(money, coins), expected, `Test failed for input (money = ${money}, coins = [${coins}])`);
+  };
+describe('Counting Change Combinations', () => {
+    it('Counting Change Combinations', () => {
+      test(0, [1, 2], 1);
+      test(4, [1, 2], 3);
+      test(10, [5, 2, 3], 4);
+      test(11, [5, 7], 0);
+      test(300, [5, 10, 20, 50, 100, 200, 500], 1022);
+    });
+  });

@@ -404,21 +404,101 @@ describe("Are we alternate? ", function () {
 
 // Simple solution
 function countChange(money, coins) {
-    if(money === 0) return 1
-    if(money < 0 || !coins.length) return 0
-    return countChange (money -  coins[0], coins) + countChange (money, coins.slice(1))
+    if (money === 0) return 1
+    if (money < 0 || !coins.length) return 0
+    return countChange(money - coins[0], coins) + countChange(money, coins.slice(1))
 
-  }
+}
 // Tests
 const test = (money, coins, expected) => {
     assert.strictEqual(countChange(money, coins), expected, `Test failed for input (money = ${money}, coins = [${coins}])`);
-  };
+};
 describe('Counting Change Combinations', () => {
     it('Counting Change Combinations', () => {
-      test(0, [1, 2], 1);
-      test(4, [1, 2], 3);
-      test(10, [5, 2, 3], 4);
-      test(11, [5, 7], 0);
-      test(300, [5, 10, 20, 50, 100, 200, 500], 1022);
+        test(0, [1, 2], 1);
+        test(4, [1, 2], 3);
+        test(10, [5, 2, 3], 4);
+        test(11, [5, 7], 0);
+        test(300, [5, 10, 20, 50, 100, 200, 500], 1022);
     });
-  });
+});
+
+/**
+ * Boggle Word Checker,
+ * Write a function that determines whether a string is a valid guess in a Boggle board, as per the rules of Boggle. A Boggle board is a 2D array of individual characters, e.g.:
+ * [ ["I","L","A","W"],
+ * ["B","N","G","E"],
+ * ["I","U","A","O"],
+ * ["A","S","R","L"] ]
+ * Valid guesses are strings which can be formed by connecting adjacent cells (horizontally, vertically, or diagonally) without re-using any previously used cells.
+ * For example, in the above board "BINGO", "LINGO", and "ILNBIA" would all be valid guesses, while "BUNGIE", "BINS", and "SINUS" would not.
+*/
+
+// Simple solution
+function checkWord(board, word) {
+    let rows = board.length;
+    let cols = board[0].length;
+
+    let directions = [
+        [-1, -1], [-1, 0], [-1, 1],
+        [0, -1], [0, 1],
+        [1, -1], [1, 0], [1, 1]
+    ];
+
+    function dfs(i, j, index, visited) {
+
+        if (index === word.length) return true;
+
+        if (i < 0 || j < 0 || i >= rows || j >= cols || visited.has(`${i},${j}`) || board[i][j] !== word[index]) {
+            return false;
+        }
+
+        visited.add(`${i},${j}`);
+
+        for (let [dx, dy] of directions) {
+            if (dfs(i + dx, j + dy, index + 1, visited)) {
+                return true;
+            }
+        }
+        visited.delete(`${i},${j}`);
+
+        return false;
+    }
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            if (board[i][j] === word[0]) {
+                let visited = new Set();
+                if (dfs(i, j, 0, visited)) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+
+
+// Tests
+describe("Boggle Word Checker", () => {
+    it("Boggle Word Checker", () => {
+        var testBoard = [
+            ["E", "A", "R", "A"],
+            ["N", "L", "E", "C"],
+            ["I", "A", "I", "S"],
+            ["B", "Y", "O", "R"]
+        ];
+
+        assert.strictEqual(checkWord(testBoard, "C"), true);
+        assert.strictEqual(checkWord(testBoard, "EAR"),  true);
+        assert.strictEqual(checkWord(testBoard, "EARS"),  false);
+        assert.strictEqual(checkWord(testBoard, "BAILER"), true);
+        assert.strictEqual(checkWord(testBoard, "RSCAREIOYBAILNEA"),  true);
+        assert.strictEqual(checkWord(testBoard, "CEREAL"),  false);
+        assert.strictEqual(checkWord(testBoard, "ROBES"),  false);
+        assert.strictEqual(checkWord(testBoard, "BAKER"),  false);
+        assert.strictEqual(checkWord(testBoard, "CARS"),  false);
+
+    });
+});

@@ -535,3 +535,27 @@ describe('Moving Zeros To The End', () => {
 
     });
 });
+
+/**
+ * Simple Pig Latin,
+ * Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+*/
+
+// Simple solution
+
+function pigIt(str) {
+    return str.split(' ').map(e => {
+        if (!/^[a-zA-Z]+$/.test(e)) return e
+        e = e + e[0] + 'ay'
+        e = e.substring(1)
+        return e
+    }).join(' ')
+}
+
+// Tests
+describe("Simple Pig Latin,", () => {
+    it("Simple Pig Latin", () => {
+        assert.strictEqual(pigIt('Pig latin is cool'), 'igPay atinlay siay oolcay')
+        assert.strictEqual(pigIt('This is my string'), 'hisTay siay ymay tringsay')
+    });
+});

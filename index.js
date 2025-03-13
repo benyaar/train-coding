@@ -491,14 +491,47 @@ describe("Boggle Word Checker", () => {
         ];
 
         assert.strictEqual(checkWord(testBoard, "C"), true);
-        assert.strictEqual(checkWord(testBoard, "EAR"),  true);
-        assert.strictEqual(checkWord(testBoard, "EARS"),  false);
+        assert.strictEqual(checkWord(testBoard, "EAR"), true);
+        assert.strictEqual(checkWord(testBoard, "EARS"), false);
         assert.strictEqual(checkWord(testBoard, "BAILER"), true);
-        assert.strictEqual(checkWord(testBoard, "RSCAREIOYBAILNEA"),  true);
-        assert.strictEqual(checkWord(testBoard, "CEREAL"),  false);
-        assert.strictEqual(checkWord(testBoard, "ROBES"),  false);
-        assert.strictEqual(checkWord(testBoard, "BAKER"),  false);
-        assert.strictEqual(checkWord(testBoard, "CARS"),  false);
+        assert.strictEqual(checkWord(testBoard, "RSCAREIOYBAILNEA"), true);
+        assert.strictEqual(checkWord(testBoard, "CEREAL"), false);
+        assert.strictEqual(checkWord(testBoard, "ROBES"), false);
+        assert.strictEqual(checkWord(testBoard, "BAKER"), false);
+        assert.strictEqual(checkWord(testBoard, "CARS"), false);
+
+    });
+});
+
+/**
+ * Moving Zeros To The End
+ *
+*/
+
+// Simple solution
+function moveZeros(arr) {
+    let filtedList = arr.filter((num) => num !== 0);
+    let zeroList = arr.filter((num) => num === 0);
+    return filtedList.concat(zeroList);
+}
+
+// Tests
+describe('Moving Zeros To The End', () => {
+    it('Moving Zeros To The End', () => {
+        assert.deepEqual(
+            moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]),
+            [1, 2, 1, 1, 3, 1, 0, 0, 0, 0]
+        );
+
+        assert.deepEqual(
+            moveZeros([9, 0.0, 0, 9, 1, 2, 0, 1, 0, 1, 0.0, 3, 0, 1, 9, 0, 0, 0, 0, 9]),
+            [9, 9, 1, 2, 1, 1, 3, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        );
+
+        assert.deepEqual(
+            moveZeros(["a", 0, 0, "b", "c", "d", 0, 1, 0, 1, 0, 3, 0, 1, 9, 0, 0, 0, 0, 9]),
+            ["a", "b", "c", "d", 1, 1, 3, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        );
 
     });
 });

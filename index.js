@@ -592,3 +592,27 @@ describe("Human Readable Time", () => {
         assert.strictEqual(humanReadable(359999), '99:59:59');
     });
 });
+/**
+ * RGB To Hex Conversion
+ * The rgb function is incomplete. Complete it so that passing in RGB decimal values will result in a hexadecimal representation being returned. Valid decimal values for RGB are 0 - 255. Any values that fall out of that range must be rounded to the closest valid value.
+*/
+
+// Simple solution
+function rgb(r, g, b) {
+    const arr = [r, g, b]
+    return arr.map(e => {
+        if (e < 0) e = 0
+        if (e > 255) e = 255
+        return e.toString(16).padStart(2, 0)
+    }).join('').toUpperCase()
+}
+
+// Tests
+describe("RGB To Hex Conversion", () => {
+    it("RGB To Hex Conversion", () => {
+        assert.strictEqual(rgb(0,   0,   0), '000000');
+        assert.strictEqual(rgb( 0,   0, -20), '000000');
+        assert.strictEqual(rgb(300, 255, 255), 'FFFFFF');
+        assert.strictEqual(rgb(173, 255,  47), 'ADFF2F');
+    });
+});

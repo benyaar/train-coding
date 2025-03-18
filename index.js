@@ -710,4 +710,31 @@ describe('Pete, the baker', function() {
       assert.equal(cakes(recipe, available), result);
     });
   });
+
+  /**
+   * Weight for weight,
+   * When two numbers have the same "weight", let us class them as if they were strings (alphabetical ordering) and not numbers:
+   * 180 is before 90 since, having the same "weight" (9), it comes before as a string.
+  */
   
+  // Simple solution
+  
+  function orderWeight(str) {
+    return str.split(' ').sort((a, b) => {
+        const sumA =  a.split('').reduce((e, a)=> Number(e)+Number(a),0)
+        const sumB =  b.split('').reduce((e, a)=> Number(e)+Number(a),0)
+        if(sumA==sumB){
+            return a.localeCompare(b)
+        }
+        return sumA-sumB
+    }).join(' ');
+}
+  
+  // Tests
+  
+describe("Weight for weight",function() {
+    it("Weight for weight",function() {
+      assert.strictEqual(orderWeight("103 123 4444 99 2000"), "2000 103 123 4444 99")
+      assert.strictEqual(orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"), "11 11 2000 10003 22 123 1234000 44444444 9999")
+    })
+  })

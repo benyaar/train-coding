@@ -610,10 +610,10 @@ function rgb(r, g, b) {
 // Tests
 describe("RGB To Hex Conversion", () => {
     it("RGB To Hex Conversion", () => {
-        assert.strictEqual(rgb(0,   0,   0), '000000');
-        assert.strictEqual(rgb( 0,   0, -20), '000000');
+        assert.strictEqual(rgb(0, 0, 0), '000000');
+        assert.strictEqual(rgb(0, 0, -20), '000000');
         assert.strictEqual(rgb(300, 255, 255), 'FFFFFF');
-        assert.strictEqual(rgb(173, 255,  47), 'ADFF2F');
+        assert.strictEqual(rgb(173, 255, 47), 'ADFF2F');
     });
 });
 
@@ -627,31 +627,31 @@ describe("RGB To Hex Conversion", () => {
 */
 
 // Simple solution
-function zero(f) {return f ? f(0) : 0;}
-function one(f) {return f ? f(1) : 1;}
-function two(f) {return f ? f(2) : 2;}
-function three(f) {return f ? f(3) : 3;}
-function four(f) {return f ? f(4) : 4;}
-function five(f) {return f ? f(5) : 5;}
-function six(f) {return f ? f(6) : 6;}
-function seven(f) {return f ? f(7) : 7;}
-function eight(f) {return f ? f(8) : 8;}
-function nine(f) {return f ? f(9) : 9;}
+function zero(f) { return f ? f(0) : 0; }
+function one(f) { return f ? f(1) : 1; }
+function two(f) { return f ? f(2) : 2; }
+function three(f) { return f ? f(3) : 3; }
+function four(f) { return f ? f(4) : 4; }
+function five(f) { return f ? f(5) : 5; }
+function six(f) { return f ? f(6) : 6; }
+function seven(f) { return f ? f(7) : 7; }
+function eight(f) { return f ? f(8) : 8; }
+function nine(f) { return f ? f(9) : 9; }
 
-function plus(b) {return (a) => a + b;}
-function minus(b) {return (a) => a - b;}
-function times(b) {return (a) => a * b; }
-function dividedBy(b) {return (a) => Math.floor(a / b);}
+function plus(b) { return (a) => a + b; }
+function minus(b) { return (a) => a - b; }
+function times(b) { return (a) => a * b; }
+function dividedBy(b) { return (a) => Math.floor(a / b); }
 
 // Tests
 describe("Calculating with Functions", () => {
     it("Calculating with Functions", () => {
-      assert.strictEqual(seven(times    (five ())), 35, "seven(times(five ()))");
-      assert.strictEqual(four (plus     (nine ())), 13, "four (plus(nine ()))");
-      assert.strictEqual(eight(minus    (three())),  5, "eight(minus(three()))");
-      assert.strictEqual(six  (dividedBy(two  ())),  3, "six(dividedBy(two()))");
+        assert.strictEqual(seven(times(five())), 35, "seven(times(five ()))");
+        assert.strictEqual(four(plus(nine())), 13, "four (plus(nine ()))");
+        assert.strictEqual(eight(minus(three())), 5, "eight(minus(three()))");
+        assert.strictEqual(six(dividedBy(two())), 3, "six(dividedBy(two()))");
     });
-  });
+});
 
 /**
  * Pete, the baker,
@@ -669,72 +669,137 @@ function cakes(recipe, available) {
 
 // Tests
 
-describe('Pete, the baker', function() {
-    it('basic recipes', function() {
-      let recipe = {flour: 500, sugar: 200, eggs: 1};
-      let available = {flour: 1200, sugar: 1200, eggs: 5, milk: 200};
-      let result = 2;
-      assert.equal(cakes(recipe, available), result);
-      
-      recipe = {cream: 200, flour: 300, sugar: 150, milk: 100, oil: 100};
-      available = {sugar: 1700, flour: 20000, milk: 20000, oil: 30000, cream: 5000};
-      result = 11;
-      assert.equal(cakes(recipe, available), result);
-    });
-    
-    it('missing ingredient', function() {
-      let recipe = {apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100};
-      let available = {sugar: 500, flour: 2000, milk: 2000};
-      let result = 0;
-      assert.equal(cakes(recipe, available), result);
-    });
-    
-    it('not enough ingredients', function() {
-      let recipe = {apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100};
-      let available = {sugar: 500, flour: 2000, milk: 2000, apples: 15, oil: 20};
-      let result = 0;
-      assert.equal(cakes(recipe, available), result);
-    });
-    
-    it('no ingredients available', function() {
-      let recipe = {eggs: 4, flour: 400};
-      let available = {};
-      let result = 0;
-      assert.equal(cakes(recipe, available), result);
-    });
-    
-    it('exactly enough ingredients for 1 cake', function() {
-      let recipe = {cream: 1, flour: 3, sugar: 1, milk: 1, oil: 1, eggs: 1};
-      let available = {cream: 1, flour: 3, sugar: 1, milk: 1, oil: 1, eggs: 1};
-      let result = 1;
-      assert.equal(cakes(recipe, available), result);
-    });
-  });
+describe('Pete, the baker', function () {
+    it('basic recipes', function () {
+        let recipe = { flour: 500, sugar: 200, eggs: 1 };
+        let available = { flour: 1200, sugar: 1200, eggs: 5, milk: 200 };
+        let result = 2;
+        assert.equal(cakes(recipe, available), result);
 
-  /**
-   * Weight for weight,
-   * When two numbers have the same "weight", let us class them as if they were strings (alphabetical ordering) and not numbers:
-   * 180 is before 90 since, having the same "weight" (9), it comes before as a string.
-  */
-  
-  // Simple solution
-  
-  function orderWeight(str) {
+        recipe = { cream: 200, flour: 300, sugar: 150, milk: 100, oil: 100 };
+        available = { sugar: 1700, flour: 20000, milk: 20000, oil: 30000, cream: 5000 };
+        result = 11;
+        assert.equal(cakes(recipe, available), result);
+    });
+
+    it('missing ingredient', function () {
+        let recipe = { apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 };
+        let available = { sugar: 500, flour: 2000, milk: 2000 };
+        let result = 0;
+        assert.equal(cakes(recipe, available), result);
+    });
+
+    it('not enough ingredients', function () {
+        let recipe = { apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 };
+        let available = { sugar: 500, flour: 2000, milk: 2000, apples: 15, oil: 20 };
+        let result = 0;
+        assert.equal(cakes(recipe, available), result);
+    });
+
+    it('no ingredients available', function () {
+        let recipe = { eggs: 4, flour: 400 };
+        let available = {};
+        let result = 0;
+        assert.equal(cakes(recipe, available), result);
+    });
+
+    it('exactly enough ingredients for 1 cake', function () {
+        let recipe = { cream: 1, flour: 3, sugar: 1, milk: 1, oil: 1, eggs: 1 };
+        let available = { cream: 1, flour: 3, sugar: 1, milk: 1, oil: 1, eggs: 1 };
+        let result = 1;
+        assert.equal(cakes(recipe, available), result);
+    });
+});
+
+/**
+ * Weight for weight,
+ * When two numbers have the same "weight", let us class them as if they were strings (alphabetical ordering) and not numbers:
+ * 180 is before 90 since, having the same "weight" (9), it comes before as a string.
+*/
+
+// Simple solution
+
+function orderWeight(str) {
     return str.split(' ').sort((a, b) => {
-        const sumA =  a.split('').reduce((e, a)=> Number(e)+Number(a),0)
-        const sumB =  b.split('').reduce((e, a)=> Number(e)+Number(a),0)
-        if(sumA==sumB){
+        const sumA = a.split('').reduce((e, a) => Number(e) + Number(a), 0)
+        const sumB = b.split('').reduce((e, a) => Number(e) + Number(a), 0)
+        if (sumA == sumB) {
             return a.localeCompare(b)
         }
-        return sumA-sumB
+        return sumA - sumB
     }).join(' ');
 }
-  
-  // Tests
-  
-describe("Weight for weight",function() {
-    it("Weight for weight",function() {
-      assert.strictEqual(orderWeight("103 123 4444 99 2000"), "2000 103 123 4444 99")
-      assert.strictEqual(orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"), "11 11 2000 10003 22 123 1234000 44444444 9999")
+
+// Tests
+
+describe("Weight for weight", function () {
+    it("Weight for weight", function () {
+        assert.strictEqual(orderWeight("103 123 4444 99 2000"), "2000 103 123 4444 99")
+        assert.strictEqual(orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"), "11 11 2000 10003 22 123 1234000 44444444 9999")
     })
-  })
+})
+
+
+/**
+ * Scramblies,
+ * Complete the function scramble(str1, str2) that returns true if a portion of str1 characters can be rearranged to match str2, otherwise returns false.
+*/
+
+// Simple solution
+function scramble(str1, str2) {
+    const freq = {};
+
+    for (let char of str1) {
+        freq[char] = (freq[char] || 0) + 1;
+    }
+
+    for (let char of str2) {
+        if (!freq[char]) return false;
+        freq[char]--;
+    }
+
+    return true;
+}
+
+// Best solution
+function scramble2(str1, str2) {
+    let occurences = str1.split("").reduce((arr, cur) => { arr[cur] ? arr[cur]++ : arr[cur] = 1; return arr; }, {});
+    return str2.split("").every((character) => --occurences[character] >= 0);
+}
+
+// Tests
+function dotest(s1, s2, expected) {
+    assert.strictEqual(scramble(s1, s2), expected, `Incorrect answer for inputs:\ns1='${s1}'\ns2='${s2}'\n`);
+}
+
+describe('Scramblies Tests', function () {
+
+    const charList = "abcdefghijklmnopqrstuvwxyz";
+    let rand = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min) };
+    let char = function () { return charList[Math.random() * 26 | 0] };
+
+    function sol(str1, str2) {
+        let map = {};
+        for (let c of str1) map[c] = map[c] + 1 || 1;
+        for (let c of str2) {
+            if (!map[c]) return false;
+            map[c]--;
+        }
+        return true;
+    }
+    let randomStr = function (length, exclude) {
+        let arr = [], c;
+        for (let i = 0; i <= length; i++) {
+            while ((c = char()) == exclude) { };
+            arr.push(c);
+        }
+        return arr.join('');
+    };
+    it('Testing small strings', function () {
+        for (let i = 0; i < 50; i++) {
+            let s1 = randomStr(rand(0, 500));
+            let s2 = randomStr(rand(0, 200));
+            dotest(s1, s2, sol(s1, s2));
+        }
+    });
+});

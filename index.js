@@ -838,3 +838,44 @@ describe("Sum of Pairs", function(){
       assert.deepEqual(sumPairs([5, 9, 13, -3], 10), [13, -3], "Subtraction: [5, 9, 13, -3] should return [13, -3] for sum = 10");
     });
   });
+
+  /**
+   * First non-repeating character
+   *
+  */
+  
+  // Simple solution
+  function firstNonRepeatingLetter(s) {
+    const seen = new Set()
+    
+    s.replace(/\s+/g, "").split('').forEach(el => {
+ 
+        if(!seen.has(el.toLowerCase()) && !seen.has(el.toUpperCase())){
+            seen.add(el)
+        }else{
+            seen.delete(el.toLowerCase())
+            seen.delete(el.toUpperCase())
+        }
+    });
+    
+    return [...seen][0] || '';
+
+}
+  
+  // Best solution
+  function firstNonRepeatingLetter2(s) {
+    var t=s.toLowerCase();
+    for (var x=0;x<t.length;x++)
+      if(t.indexOf(t[x]) === t.lastIndexOf(t[x]))
+        return s[x];
+    return "";
+  }
+
+  // Tests
+
+  describe("First non-repeating character", function () {
+    it("First non-repeating character", function () {
+        assert.strictEqual(firstNonRepeatingLetter("sTreSS"), "T")
+        assert.strictEqual(firstNonRepeatingLetter("Go hang a salami, I\'m a lasagna hog!"), ",")
+    })
+})

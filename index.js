@@ -815,8 +815,8 @@ describe('Scramblies Tests', function () {
 function sumPairs(ints, s) {
     const seen = new Set()
     for (const element of ints) {
-        const diff = s- element
-        if(seen.has(element)){
+        const diff = s - element
+        if (seen.has(element)) {
             return [diff, element]
         }
         seen.add(diff)
@@ -826,56 +826,109 @@ function sumPairs(ints, s) {
 
 
 // Tests
-describe("Sum of Pairs", function(){
-    it("Sum of Pairs", function(){
-      assert.deepEqual(sumPairs([1, 4, 8, 7, 3, 15], 8), [1, 7], "Basic: [1, 4, 8, 7, 3, 15] should return [1, 7] for sum = 8");
-      assert.deepEqual(sumPairs([1, -2, 3, 0, -6, 1], -6), [0, -6], "Negatives: [1, -2, 3, 0, -6, 1] should return [0, -6] for sum = -6");
-      assert.deepEqual(sumPairs([20, -13, 40], -7), undefined, "No Match: [20, -13, 40] should return undefined for sum = -7");
-      assert.deepEqual(sumPairs([1, 2, 3, 4, 1, 0], 2), [1, 1], "First Match From Left: [1, 2, 3, 4, 1, 0] should return [1, 1] for sum = 2");
-      assert.deepEqual(sumPairs([10, 5, 2, 3, 7, 5], 10), [3, 7], "First Match From Left REDUX!: [10, 5, 2, 3, 7, 5] should return [3, 7] for sum = 10");
-      assert.deepEqual(sumPairs([4, -2, 3, 3, 4], 8), [4, 4], "Duplicates: [4, -2, 3, 3, 4] should return [4, 4] for sum = 8");
-      assert.deepEqual(sumPairs([0, 2, 0], 0), [0, 0], "Zeroes: [0, 2, 0] should return [0, 0] for sum = 0");
-      assert.deepEqual(sumPairs([5, 9, 13, -3], 10), [13, -3], "Subtraction: [5, 9, 13, -3] should return [13, -3] for sum = 10");
+describe("Sum of Pairs", function () {
+    it("Sum of Pairs", function () {
+        assert.deepEqual(sumPairs([1, 4, 8, 7, 3, 15], 8), [1, 7], "Basic: [1, 4, 8, 7, 3, 15] should return [1, 7] for sum = 8");
+        assert.deepEqual(sumPairs([1, -2, 3, 0, -6, 1], -6), [0, -6], "Negatives: [1, -2, 3, 0, -6, 1] should return [0, -6] for sum = -6");
+        assert.deepEqual(sumPairs([20, -13, 40], -7), undefined, "No Match: [20, -13, 40] should return undefined for sum = -7");
+        assert.deepEqual(sumPairs([1, 2, 3, 4, 1, 0], 2), [1, 1], "First Match From Left: [1, 2, 3, 4, 1, 0] should return [1, 1] for sum = 2");
+        assert.deepEqual(sumPairs([10, 5, 2, 3, 7, 5], 10), [3, 7], "First Match From Left REDUX!: [10, 5, 2, 3, 7, 5] should return [3, 7] for sum = 10");
+        assert.deepEqual(sumPairs([4, -2, 3, 3, 4], 8), [4, 4], "Duplicates: [4, -2, 3, 3, 4] should return [4, 4] for sum = 8");
+        assert.deepEqual(sumPairs([0, 2, 0], 0), [0, 0], "Zeroes: [0, 2, 0] should return [0, 0] for sum = 0");
+        assert.deepEqual(sumPairs([5, 9, 13, -3], 10), [13, -3], "Subtraction: [5, 9, 13, -3] should return [13, -3] for sum = 10");
     });
-  });
+});
 
-  /**
-   * First non-repeating character
-   *
-  */
-  
-  // Simple solution
-  function firstNonRepeatingLetter(s) {
+/**
+ * First non-repeating character
+ *
+*/
+
+// Simple solution
+function firstNonRepeatingLetter(s) {
     const seen = new Set()
-    
+
     s.replace(/\s+/g, "").split('').forEach(el => {
- 
-        if(!seen.has(el.toLowerCase()) && !seen.has(el.toUpperCase())){
+
+        if (!seen.has(el.toLowerCase()) && !seen.has(el.toUpperCase())) {
             seen.add(el)
-        }else{
+        } else {
             seen.delete(el.toLowerCase())
             seen.delete(el.toUpperCase())
         }
     });
-    
+
     return [...seen][0] || '';
 
 }
-  
-  // Best solution
-  function firstNonRepeatingLetter2(s) {
-    var t=s.toLowerCase();
-    for (var x=0;x<t.length;x++)
-      if(t.indexOf(t[x]) === t.lastIndexOf(t[x]))
-        return s[x];
+
+// Best solution
+function firstNonRepeatingLetter2(s) {
+    var t = s.toLowerCase();
+    for (var x = 0; x < t.length; x++)
+        if (t.indexOf(t[x]) === t.lastIndexOf(t[x]))
+            return s[x];
     return "";
-  }
+}
 
-  // Tests
+// Tests
 
-  describe("First non-repeating character", function () {
+describe("First non-repeating character", function () {
     it("First non-repeating character", function () {
         assert.strictEqual(firstNonRepeatingLetter("sTreSS"), "T")
         assert.strictEqual(firstNonRepeatingLetter("Go hang a salami, I\'m a lasagna hog!"), ",")
     })
 })
+/**
+ * Greed is Good,
+ * Greed is a dice game played with five six-sided dice. Your mission, should you choose to accept it, is to score a throw according to these rules. You will always be given an array with five six-sided dice values.
+*/
+
+// Simple solution
+function score(dice) {
+    let res = 0
+    const count = {}
+    for (const el of dice) {
+        count[el] = count[el] ? count[el] += 1 : 1
+
+    }
+    const dictionary = { 1: 1000, 2: 200, 3: 300, 4: 400, 5: 500, 6: 600 }
+    count
+    for (const key in count) {
+        count
+        if (count[key] >= 3) {
+            res += dictionary[key]
+            count[key] -=3
+        }
+    }
+    if (count[1]) res += count[1] * 100;
+    if (count[5]) res += count[5] * 50;
+    return res
+
+}
+
+// Best solution
+function score2( dice ) {
+    var dc = [0,0,0,0,0,0];
+    var tdr = [1000,200,300,400,500,600];
+    var sdr = [100,0,0,0,50,0];
+    dice.forEach(function(x){ dc[x-1]++; });
+    return dc.reduce(function(s,x,i){ 
+      return s + (x >= 3? tdr[i] : 0) + sdr[i]*(x % 3);
+    },0);
+  }
+
+// Tests
+describe( "Greed is Good", function() {
+    it( "should value this as worthless", function() {
+      assert.strictEqual( score( [2, 3, 4, 6, 2] ), 0, "Incorrect answer for dice = [2, 3, 4, 6, 2]" );
+    });
+    
+    it( "should value this triplet correctly", function() {
+      assert.strictEqual( score( [4, 4, 4, 3, 3] ), 400, "Incorrect answer for dice = [4, 4, 4, 3, 3]" );
+    });
+    
+    it( "should value this mixed set correctly", function() {
+      assert.strictEqual( score( [2, 4, 4, 5, 4] ), 450, "Incorrect answer for dice = [2, 4, 4, 5, 4]" );
+    });
+  });

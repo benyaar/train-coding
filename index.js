@@ -1050,3 +1050,39 @@ describe("PaginationHelper", () => {
         }
     });
 });
+
+/**
+ * Product of consecutive Fib numbers
+ * 714 ---> (21, 34, true)
+ * --> since F(8) = 21, F(9) = 34 and 714 = 21 * 34
+*/
+
+// Simple solution
+
+
+function productFib(prod){
+    let a = 1
+    let b = 1
+    while((a*b) < prod){
+     let next = a+b
+     a = b
+     b = next
+ 
+    }
+    return [a, b, a*b === prod]
+ 
+ }
+
+// Tests
+describe("Product of consecutive Fib numbers", () => {
+    it("Product of consecutive Fib numbers", () => {
+      assert.sameOrderedMembers(productFib(4895), [55, 89, true])
+      assert.sameOrderedMembers(productFib(5895), [89, 144, false])
+      assert.sameOrderedMembers(productFib(74049690), [6765, 10946, true])
+      assert.sameOrderedMembers(productFib(84049690), [10946, 17711, false])
+      assert.sameOrderedMembers(productFib(193864606), [10946, 17711, true])
+      assert.sameOrderedMembers(productFib(447577), [610, 987, false])
+      assert.sameOrderedMembers(productFib(602070), [610, 987, true])
+    });
+  });
+  

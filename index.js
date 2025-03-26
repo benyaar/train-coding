@@ -1184,3 +1184,69 @@ describe('Integers: Recreation One...', function () {
         }
     })
 })
+/**
+ * Best travel
+ * ts = [50, 55, 56, 57, 58] choose_best_sum(163, 3, ts) -> 163
+ * With list ls and 3 towns to visit they can make a choice between: [50,55,57],[50,55,58],[50,55,60],[50,57,58],[50,57,60],[50,58,60],[55,57,58],[55,57,60],[55,58,60],[57,58,60].
+ * The sums of distances are then: 162, 163, 165, 165, 167, 168, 170, 172, 173, 175.
+*/
+
+// Simple solution
+
+function chooseBestSum(t, k, ls) {
+    function combinations(arr, k) {
+        if (k === 0) return [[]];
+        if (arr.length === 0) return [];
+        
+        let [first, ...rest] = arr;
+        let withFirst = combinations(rest, k - 1).map(comb => [first, ...comb]);
+        let withoutFirst = combinations(rest, k);
+        
+        return [...withFirst, ...withoutFirst];
+    }
+
+    let possibleSums = combinations(ls, k)
+        .map(comb => comb.reduce((sum, val) => sum + val, 0))
+        .filter(sum => sum <= t);
+
+    return possibleSums.length ? Math.max(...possibleSums) : null;
+}
+
+// Tests
+describe("Best travel",function() {
+    it("Basic tests ",function() {        
+      let ts = [50, 55, 56, 57, 58];
+      assert.strictEqual(chooseBestSum(163, 3, ts), 163)
+      ts = [50]
+      assert.strictEqual(chooseBestSum(163, 3, ts), null)
+      ts = [91, 74, 73, 85, 73, 81, 87]
+      assert.strictEqual(chooseBestSum(230, 3, ts), 228)
+      assert.strictEqual(chooseBestSum(331, 2, ts), 178)
+      assert.strictEqual(chooseBestSum(331, 4, ts), 331)
+      assert.strictEqual(chooseBestSum(331, 5, ts), null)
+      assert.strictEqual(chooseBestSum(331, 1, ts), 91)
+      assert.strictEqual(chooseBestSum(700, 6, ts), 491)
+      let xs = [100, 76, 56, 44, 89, 73, 68, 56, 64, 123, 2333, 144, 50, 132, 123, 34, 89];
+      assert.strictEqual(chooseBestSum(230, 4, xs), 230)
+      assert.strictEqual(chooseBestSum(430, 5, xs), 430)
+      assert.strictEqual(chooseBestSum(430, 8, xs), null)
+      assert.strictEqual(chooseBestSum(880, 8, xs), 876)
+      assert.strictEqual(chooseBestSum(2430, 15, xs), 1287)
+      assert.strictEqual(chooseBestSum(100, 2, xs), 100)
+      assert.strictEqual(chooseBestSum(276, 3, xs), 276)
+      assert.strictEqual(chooseBestSum(3760, 17, xs), 3654)
+      assert.strictEqual(chooseBestSum(3760, 40, xs), null)
+      assert.strictEqual(chooseBestSum(50, 1, xs), 50)
+      assert.strictEqual(chooseBestSum(1000, 18, xs), null)
+      xs = [100, 64, 123, 2333, 144, 50, 132, 123, 34, 89]
+      assert.strictEqual(chooseBestSum(230, 4, xs), null)
+      assert.strictEqual(chooseBestSum(230, 2, xs), 223)
+      assert.strictEqual(chooseBestSum(2333, 1, xs), 2333)
+      assert.strictEqual(chooseBestSum(2333, 8, xs), 825)
+      xs = [1000, 640, 1230, 2333, 1440, 500, 1320, 1230, 340, 890, 732, 1346]
+      assert.strictEqual(chooseBestSum(2300, 4, xs), 2212)
+      assert.strictEqual(chooseBestSum(2300, 5, xs), null)
+      assert.strictEqual(chooseBestSum(2332, 3, xs), 2326)
+      assert.strictEqual(chooseBestSum(23331, 8, xs), 10789)
+      assert.strictEqual(chooseBestSum(331, 2, xs), null)
+  })})

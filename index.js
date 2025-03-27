@@ -1250,3 +1250,47 @@ describe("Best travel",function() {
       assert.strictEqual(chooseBestSum(23331, 8, xs), 10789)
       assert.strictEqual(chooseBestSum(331, 2, xs), null)
   })})
+
+/**
+ * Gap in Primes,
+ *
+*/
+
+// Simple solution
+
+
+function isPrime(num) {
+    if (num < 2) return false;
+    if (num === 2) return true;
+    if (num % 2 === 0) return false;
+    for (let i = 3; i * i <= num; i += 2) {
+        if (num % i === 0) return false;
+    }
+    return true;
+}
+
+function gap(g, m, n) {
+    let prevPrime = null;
+
+    for (let i = m; i <= n; i++) {
+        if (isPrime(i)) {
+            if (prevPrime !== null && i - prevPrime === g) {
+                return [prevPrime, i]; 
+            }
+            prevPrime = i; 
+        }
+    }
+    
+    return null; 
+}
+
+
+// Tests
+describe("Gap",function() {
+    it("Basic tests",function() {    
+      assert.deepEqual(gap(2,100,110), [101, 103]);
+      assert.deepEqual(gap(4,100,110), [103, 107]);
+      assert.deepEqual(gap(6,100,110), null);
+      assert.deepEqual(gap(8,300,400), [359, 367]);
+      assert.deepEqual(gap(10,300,400), [337, 347]);
+  })})

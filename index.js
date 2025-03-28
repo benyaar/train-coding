@@ -1197,11 +1197,11 @@ function chooseBestSum(t, k, ls) {
     function combinations(arr, k) {
         if (k === 0) return [[]];
         if (arr.length === 0) return [];
-        
+
         let [first, ...rest] = arr;
         let withFirst = combinations(rest, k - 1).map(comb => [first, ...comb]);
         let withoutFirst = combinations(rest, k);
-        
+
         return [...withFirst, ...withoutFirst];
     }
 
@@ -1213,43 +1213,44 @@ function chooseBestSum(t, k, ls) {
 }
 
 // Tests
-describe("Best travel",function() {
-    it("Basic tests ",function() {        
-      let ts = [50, 55, 56, 57, 58];
-      assert.strictEqual(chooseBestSum(163, 3, ts), 163)
-      ts = [50]
-      assert.strictEqual(chooseBestSum(163, 3, ts), null)
-      ts = [91, 74, 73, 85, 73, 81, 87]
-      assert.strictEqual(chooseBestSum(230, 3, ts), 228)
-      assert.strictEqual(chooseBestSum(331, 2, ts), 178)
-      assert.strictEqual(chooseBestSum(331, 4, ts), 331)
-      assert.strictEqual(chooseBestSum(331, 5, ts), null)
-      assert.strictEqual(chooseBestSum(331, 1, ts), 91)
-      assert.strictEqual(chooseBestSum(700, 6, ts), 491)
-      let xs = [100, 76, 56, 44, 89, 73, 68, 56, 64, 123, 2333, 144, 50, 132, 123, 34, 89];
-      assert.strictEqual(chooseBestSum(230, 4, xs), 230)
-      assert.strictEqual(chooseBestSum(430, 5, xs), 430)
-      assert.strictEqual(chooseBestSum(430, 8, xs), null)
-      assert.strictEqual(chooseBestSum(880, 8, xs), 876)
-      assert.strictEqual(chooseBestSum(2430, 15, xs), 1287)
-      assert.strictEqual(chooseBestSum(100, 2, xs), 100)
-      assert.strictEqual(chooseBestSum(276, 3, xs), 276)
-      assert.strictEqual(chooseBestSum(3760, 17, xs), 3654)
-      assert.strictEqual(chooseBestSum(3760, 40, xs), null)
-      assert.strictEqual(chooseBestSum(50, 1, xs), 50)
-      assert.strictEqual(chooseBestSum(1000, 18, xs), null)
-      xs = [100, 64, 123, 2333, 144, 50, 132, 123, 34, 89]
-      assert.strictEqual(chooseBestSum(230, 4, xs), null)
-      assert.strictEqual(chooseBestSum(230, 2, xs), 223)
-      assert.strictEqual(chooseBestSum(2333, 1, xs), 2333)
-      assert.strictEqual(chooseBestSum(2333, 8, xs), 825)
-      xs = [1000, 640, 1230, 2333, 1440, 500, 1320, 1230, 340, 890, 732, 1346]
-      assert.strictEqual(chooseBestSum(2300, 4, xs), 2212)
-      assert.strictEqual(chooseBestSum(2300, 5, xs), null)
-      assert.strictEqual(chooseBestSum(2332, 3, xs), 2326)
-      assert.strictEqual(chooseBestSum(23331, 8, xs), 10789)
-      assert.strictEqual(chooseBestSum(331, 2, xs), null)
-  })})
+describe("Best travel", function () {
+    it("Basic tests ", function () {
+        let ts = [50, 55, 56, 57, 58];
+        assert.strictEqual(chooseBestSum(163, 3, ts), 163)
+        ts = [50]
+        assert.strictEqual(chooseBestSum(163, 3, ts), null)
+        ts = [91, 74, 73, 85, 73, 81, 87]
+        assert.strictEqual(chooseBestSum(230, 3, ts), 228)
+        assert.strictEqual(chooseBestSum(331, 2, ts), 178)
+        assert.strictEqual(chooseBestSum(331, 4, ts), 331)
+        assert.strictEqual(chooseBestSum(331, 5, ts), null)
+        assert.strictEqual(chooseBestSum(331, 1, ts), 91)
+        assert.strictEqual(chooseBestSum(700, 6, ts), 491)
+        let xs = [100, 76, 56, 44, 89, 73, 68, 56, 64, 123, 2333, 144, 50, 132, 123, 34, 89];
+        assert.strictEqual(chooseBestSum(230, 4, xs), 230)
+        assert.strictEqual(chooseBestSum(430, 5, xs), 430)
+        assert.strictEqual(chooseBestSum(430, 8, xs), null)
+        assert.strictEqual(chooseBestSum(880, 8, xs), 876)
+        assert.strictEqual(chooseBestSum(2430, 15, xs), 1287)
+        assert.strictEqual(chooseBestSum(100, 2, xs), 100)
+        assert.strictEqual(chooseBestSum(276, 3, xs), 276)
+        assert.strictEqual(chooseBestSum(3760, 17, xs), 3654)
+        assert.strictEqual(chooseBestSum(3760, 40, xs), null)
+        assert.strictEqual(chooseBestSum(50, 1, xs), 50)
+        assert.strictEqual(chooseBestSum(1000, 18, xs), null)
+        xs = [100, 64, 123, 2333, 144, 50, 132, 123, 34, 89]
+        assert.strictEqual(chooseBestSum(230, 4, xs), null)
+        assert.strictEqual(chooseBestSum(230, 2, xs), 223)
+        assert.strictEqual(chooseBestSum(2333, 1, xs), 2333)
+        assert.strictEqual(chooseBestSum(2333, 8, xs), 825)
+        xs = [1000, 640, 1230, 2333, 1440, 500, 1320, 1230, 340, 890, 732, 1346]
+        assert.strictEqual(chooseBestSum(2300, 4, xs), 2212)
+        assert.strictEqual(chooseBestSum(2300, 5, xs), null)
+        assert.strictEqual(chooseBestSum(2332, 3, xs), 2326)
+        assert.strictEqual(chooseBestSum(23331, 8, xs), 10789)
+        assert.strictEqual(chooseBestSum(331, 2, xs), null)
+    })
+})
 
 /**
  * Gap in Primes,
@@ -1275,22 +1276,53 @@ function gap(g, m, n) {
     for (let i = m; i <= n; i++) {
         if (isPrime(i)) {
             if (prevPrime !== null && i - prevPrime === g) {
-                return [prevPrime, i]; 
+                return [prevPrime, i];
             }
-            prevPrime = i; 
+            prevPrime = i;
         }
     }
-    
-    return null; 
+
+    return null;
 }
 
 
 // Tests
-describe("Gap",function() {
-    it("Basic tests",function() {    
-      assert.deepEqual(gap(2,100,110), [101, 103]);
-      assert.deepEqual(gap(4,100,110), [103, 107]);
-      assert.deepEqual(gap(6,100,110), null);
-      assert.deepEqual(gap(8,300,400), [359, 367]);
-      assert.deepEqual(gap(10,300,400), [337, 347]);
-  })})
+describe("Gap", function () {
+    it("Basic tests", function () {
+        assert.deepEqual(gap(2, 100, 110), [101, 103]);
+        assert.deepEqual(gap(4, 100, 110), [103, 107]);
+        assert.deepEqual(gap(6, 100, 110), null);
+        assert.deepEqual(gap(8, 300, 400), [359, 367]);
+        assert.deepEqual(gap(10, 300, 400), [337, 347]);
+    })
+})
+
+/**
+ * groupAnagrams
+ *
+*/
+
+// Simple solution
+
+function groupAnagrams(params) {
+    const map = new Map()
+    for (let i = 0; i < params.length; i++) {
+        const wordInArr = params[i].split("").sort().join('');
+        if (map.has(wordInArr)) {
+            map.get(wordInArr).push(params[i])
+
+        } else {
+            map.set(wordInArr, [params[i]])
+        }
+
+    }
+    return Array.from(map.values())
+}
+
+
+// Tests
+describe("groupAnagrams", function () {
+    it("Basic tests", function () {
+        assert.deepEqual(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]), [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]);
+    })
+})

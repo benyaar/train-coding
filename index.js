@@ -1326,3 +1326,57 @@ describe("groupAnagrams", function () {
         assert.deepEqual(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]), [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]);
     })
 })
+
+/**
+ * repeatCount
+ *
+*/
+
+// Simple solution
+
+function repeatCount(str) {
+    const arr = []
+    let obj = {}
+    for (let i = 0; i < str.length; i++) {
+        let curr = str[i]
+        let next = str[i + 1]
+        if (obj[curr]) {
+            obj[curr] += 1
+        }
+        if (!obj[curr]) {
+            obj[curr] = 1
+        }
+        if (curr === next) {
+            continue
+        } else {
+            arr.push(obj)
+            obj = {}
+        }
+    }
+    return arr
+}
+
+// Best solution
+function repeatCount2(str) {
+    const result = [];
+    let count = 1;
+
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === str[i + 1]) {
+            count++;
+        } else {
+            result.push({ [str[i]]: count });
+            count = 1;
+        }
+    }
+    return result;
+}
+
+
+// Tests
+describe("repeatCount", function () {
+    it("Basic tests", function () {
+        assert.deepEqual(repeatCount("aaaabbbcca"), [{ a: 4 }, { b: 3 }, { c: 2 }, { a: 1 }]);
+        assert.deepEqual(repeatCount2("aaaabbbcca"), [{ a: 4 }, { b: 3 }, { c: 2 }, { a: 1 }]);
+    })
+})

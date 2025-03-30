@@ -1380,3 +1380,49 @@ describe("repeatCount", function () {
         assert.deepEqual(repeatCount2("aaaabbbcca"), [{ a: 4 }, { b: 3 }, { c: 2 }, { a: 1 }]);
     })
 })
+
+/**
+ * groupPalindromes
+ *
+ */
+
+// Simple solution
+
+function groupPalindromes(words) {
+    const map = new Map();
+    map.set("palindromes", []);
+    map.set("others", []);
+
+    for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        const reversed = word.split("").reverse().join("");
+        
+        if (word === reversed) {
+            map.get("palindromes").push(word);
+        } else {
+            map.get("others").push(word);
+        }
+    }
+
+    return [map.get("palindromes"), map.get("others")];
+}
+
+// Tests
+describe("groupPalindromes", function () {
+    it("Basic tests", function () {
+        assert.deepEqual(
+            groupPalindromes(["madam", "hello", "racecar", "world", "level"]),
+            [["madam", "racecar", "level"], ["hello", "world"]]
+        );
+
+        assert.deepEqual(
+            groupPalindromes(["abc", "def", "ghi"]),
+            [[], ["abc", "def", "ghi"]]
+        );
+
+        assert.deepEqual(
+            groupPalindromes(["wow", "noon", "radar", "civic"]),
+            [["wow", "noon", "radar", "civic"], []]
+        );
+    });
+});

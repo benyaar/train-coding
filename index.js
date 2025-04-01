@@ -1396,7 +1396,7 @@ function groupPalindromes(words) {
     for (let i = 0; i < words.length; i++) {
         const word = words[i];
         const reversed = word.split("").reverse().join("");
-        
+
         if (word === reversed) {
             map.get("palindromes").push(word);
         } else {
@@ -1443,7 +1443,7 @@ function isSolved(board) {
             return board[0][i];
         }
     }
-    
+
 
     if (board[0][0] && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
         return board[0][0];
@@ -1451,24 +1451,57 @@ function isSolved(board) {
     if (board[0][2] && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
         return board[0][2];
     }
-    
-  
+
+
     for (let row of board) {
         if (row.includes(0)) {
             return -1;
         }
     }
-    
+
     return 0;
 }
-
-
 
 // Tests
 describe("Tic-Tac-Toe Checker", () => {
     it("test", () => {
-      assert.strictEqual(isSolved([[0,0,1],
-                                   [0,1,2],
-                                   [2,1,0]]), -1);
+        assert.strictEqual(isSolved([[0, 0, 1],
+        [0, 1, 2],
+        [2, 1, 0]]), -1);
+    });
+});
+/**
+ * Is my friend cheating?
+ * A friend of mine takes the sequence of all numbers from 1 to n (where n > 0).
+ * Within that sequence, he chooses two numbers, a and b.
+ * He says that the product of a and b should be equal to the sum of all numbers in the sequence, excluding a and b.
+ * Given a number n, could you tell me the numbers he excluded from the sequence?
+ * 
+ *
+*/
+
+// Simple solution
+
+function removeNb(n) {
+    let S = (n * (n + 1)) / 2;
+    let result = [];
+
+    for (let a = 1; a <= n; a++) {
+        let b = (S - a) / (a + 1);
+        if (Number.isInteger(b) && b >= 1 && b <= n) {
+            result.push([a, b]);
+        }
+    }
+
+    return result;
+}
+
+
+// Tests
+describe("Is my friend cheating?", () => {
+    it("test", () => {
+      assert.deepEqual(removeNb(26), [[15,21], [21,15]]);
+      assert.deepEqual(removeNb(100), []);
     });
   });
+  

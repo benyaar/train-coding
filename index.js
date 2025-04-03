@@ -1500,18 +1500,18 @@ function removeNb(n) {
 // Tests
 describe("Is my friend cheating?", () => {
     it("test", () => {
-      assert.deepEqual(removeNb(26), [[15,21], [21,15]]);
-      assert.deepEqual(removeNb(100), []);
+        assert.deepEqual(removeNb(26), [[15, 21], [21, 15]]);
+        assert.deepEqual(removeNb(100), []);
     });
-  });
+});
 
-  /**
-   * Find the odd int
-   *
-  */
-  
-  // Simple solution
-  function findOdd(a) {
+/**
+ * Find the odd int
+ *
+*/
+
+// Simple solution
+function findOdd(a) {
     const res = {};
 
     for (let num of a) {
@@ -1524,32 +1524,80 @@ describe("Is my friend cheating?", () => {
         }
     }
 }
-  
-  // Best solution
-  const findOdd2 = (xs) => xs.reduce((a, b) => a ^ b);
-  
-  // Tests
-  describe('Find the odd int', function() {
-  
+
+// Best solution
+const findOdd2 = (xs) => xs.reduce((a, b) => a ^ b);
+
+// Tests
+describe('Find the odd int', function () {
+
     function doTest(a, n) {
-      assert.strictEqual(findOdd([...a]), n, `Incorrect answer for input=[${a}]`);
+        assert.strictEqual(findOdd([...a]), n, `Incorrect answer for input=[${a}]`);
     }
-    
+
     it("Example tests", () => {
-      doTest([7], 7);
-      doTest([0], 0);
-      doTest([1,1,2], 2);
-      doTest([0,1,0,1,0], 0);
-      doTest([1,2,2,3,3,3,4,3,3,3,2,2,1], 4);
+        doTest([7], 7);
+        doTest([0], 0);
+        doTest([1, 1, 2], 2);
+        doTest([0, 1, 0, 1, 0], 0);
+        doTest([1, 2, 2, 3, 3, 3, 4, 3, 3, 3, 2, 2, 1], 4);
     });
-    
+
     it("Fixed tests", () => {
-      doTest([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5], 5);
-      doTest([1,1,2,-2,5,2,4,4,-1,-2,5], -1);
-      doTest([20,1,1,2,2,3,3,5,5,4,20,4,5], 5);
-      doTest([10], 10);
-      doTest([1,1,1,1,1,1,10,1,1,1,1], 10);
-      doTest([5,4,3,2,1,5,4,3,2,10,10], 1);
+        doTest([20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5], 5);
+        doTest([1, 1, 2, -2, 5, 2, 4, 4, -1, -2, 5], -1);
+        doTest([20, 1, 1, 2, 2, 3, 3, 5, 5, 4, 20, 4, 5], 5);
+        doTest([10], 10);
+        doTest([1, 1, 1, 1, 1, 1, 10, 1, 1, 1, 1], 10);
+        doTest([5, 4, 3, 2, 1, 5, 4, 3, 2, 10, 10], 1);
     });
-  });
-  
+});
+
+/**
+ * Sum of Digits / Digital Root,
+ * Given n, take the sum of the digits of n. If that value has more than one digit, continue reducing in this way until a single-digit number is produced. The input will be a non-negative integer.
+*/
+
+// Simple solution
+function digitalRoot(n) {
+    let num = n.toString().split('').reduce((a, b) => Number(a) + Number(b), 0)
+    return num < 10 ? num : digitalRoot(num)
+}
+
+// Best solution
+function digital_root2(n) {
+    return (n - 1) % 9 + 1;
+}
+
+// Tests
+if (typeof digital_root === 'function')
+    digitalRoot = digital_root;
+
+describe('digitalRoot', function () {
+
+    function dotest(input, expected) {
+        assert.strictEqual(digitalRoot(input), expected, `Incorrect answer for n=${input}`)
+    }
+
+    it('Should pass basic tests', function () {
+        dotest(16, 7)
+        dotest(195, 6)
+        dotest(992, 2)
+        dotest(999999999999, 9)
+        dotest(167346, 9)
+        dotest(10, 1)
+        dotest(0, 0)
+    })
+
+    it('Should pass random tests', function () {
+
+        function digital_root_sol(n) {
+            return n > 0 ? 1 + ((parseInt(n) - 1) % 9) : 0
+        }
+
+        for (let i = 0; i < 100; i++) {
+            let n = Math.floor(Math.random() * 1000000);
+            dotest(n, digital_root_sol(n))
+        }
+    })
+})

@@ -1660,3 +1660,49 @@ describe("countBits", () => {
       });
     }
   })
+
+  /**
+ * groupByVowelStart
+ *
+ * 
+ */
+
+// Simple solution
+
+function groupByVowelStart(words) {
+    const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+    const map = new Map();
+    map.set("vowelStart", []);
+    map.set("others", []);
+
+    for (let word of words) {
+        const firstChar = word[0].toLowerCase();
+        if (vowels.has(firstChar)) {
+            map.get("vowelStart").push(word);
+        } else {
+            map.get("others").push(word);
+        }
+    }
+
+    return [map.get("vowelStart"), map.get("others")];
+}
+
+// Tests
+describe("groupByVowelStart", function () {
+    it("Basic tests", function () {
+        assert.deepEqual(
+            groupByVowelStart(["apple", "banana", "orange", "grape", "umbrella"]),
+            [["apple", "orange", "umbrella"], ["banana", "grape"]]
+        );
+
+        assert.deepEqual(
+            groupByVowelStart(["dog", "cat", "mouse"]),
+            [[], ["dog", "cat", "mouse"]]
+        );
+
+        assert.deepEqual(
+            groupByVowelStart(["elephant", "iguana", "ostrich", "antelope"]),
+            [["elephant", "iguana", "ostrich", "antelope"], []]
+        );
+    });
+});

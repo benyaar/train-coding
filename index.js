@@ -1706,3 +1706,57 @@ describe("groupByVowelStart", function () {
         );
     });
 });
+
+/**
+ * A Chain adding function
+ *
+*/
+
+// Simple solution
+
+function addChain (n){
+    const fn = function(x) {
+      return addChain(n + x);
+    };
+    
+    fn.valueOf = function() {
+      return n;
+    };
+    
+    return fn;
+  }
+// Tests
+describe("addChain", () => {
+	it("A single call should return the number passed in", () => {
+		assert.equal(addChain(1), 1);
+	});
+	it("several calls", () => {
+		assert.equal(addChain(1)(2), 3);
+		assert.equal(addChain(1)(2)(3), 6);
+		assert.equal(addChain(1)(2)(3)(4), 10);
+		assert.equal(addChain(1)(2)(3)(4)(5), 15);
+	});
+	it("should be able to be mixed with numbers", () => {
+		assert.equal(addChain(1)(2) + 3, 6);
+	});
+	it("Must be able to store values", () => {
+		const a = addChain(1)(2);
+		const b = addChain(3)(4);
+		assert.equal(a, 3);
+		assert.equal(b, 7);
+	});
+	it("Must be able to store curried functions", () => {
+		const a = addChain(1)(2);
+		assert.equal(a, 3);
+		assert.equal(a(3), 6);
+		assert.equal(a, 3);
+	});
+	it("Must be callable with a curried function", () => {
+		const a = addChain(1)(2);
+		const b = addChain(3)(4);
+		assert.equal(a(b), 10);
+		assert.equal(b(a), 10);
+		assert.equal(a, 3);
+		assert.equal(b, 7);
+	});
+});

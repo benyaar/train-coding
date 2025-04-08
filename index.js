@@ -1760,3 +1760,42 @@ describe("addChain", () => {
 		assert.equal(b, 7);
 	});
 });
+
+/**
+ * Number of trailing zeros of N!
+ * Write a program that will calculate the number of trailing zeros in a factorial of a given number
+ *
+*/
+
+// Simple solution
+function zeros(n) {
+    let count = 0;
+    while (n >= 5) {
+        n = Math.floor(n / 5);
+        count += n;
+    }
+    return count;
+}
+
+
+// Tests
+
+
+describe("Number of trailing zeros of N", function() {
+    it("Should pass random tests", function() {
+      function zerosSol(n) {
+          var count = 0;
+          var x = 5;
+          while (x <= n) {
+              count += ~~(n/x);
+              x *= 5;
+          }
+          return count;
+      }
+    
+      for (let i = 0; i < 100; i++) {
+        let n = Math.floor(Math.random() * 10000000);
+        assert.equal(zeros(n), zerosSol(n), "Testing with n = " + n)
+      }  
+    });
+  });

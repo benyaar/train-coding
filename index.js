@@ -1609,63 +1609,63 @@ describe('digitalRoot', function () {
 
 // Simple solution
 
-function countBits (n) {
+function countBits(n) {
     return n.toString(2).split('').reduce((a, b) => Number(a) + Number(b), 0)
 };
 
 // Best solution
-function countBits2 (n) {
+function countBits2(n) {
     return n.toString(2).split('0').join('').length;
 };
 
 // Tests
 describe("countBits", () => {
     it("Testing for fixed tests", () => {
-      assert.strictEqual(countBits(0), 0);
-      assert.strictEqual(countBits(4), 1);
-      assert.strictEqual(countBits(7), 3);
-      assert.strictEqual(countBits(9), 2);
-      assert.strictEqual(countBits(10), 2);
-      assert.strictEqual(countBits(26), 3);
-      assert.strictEqual(countBits(77231418), 14);
-      assert.strictEqual(countBits(12525589), 11);
-      assert.strictEqual(countBits(3811), 8);
-      assert.strictEqual(countBits(392902058), 17);
-      assert.strictEqual(countBits(1044), 3);
-      assert.strictEqual(countBits(10030245), 10);
-      assert.strictEqual(countBits(183337941), 16);
-      assert.strictEqual(countBits(20478766), 14);
-      assert.strictEqual(countBits(103021), 9);
-      assert.strictEqual(countBits(287), 6);
-      assert.strictEqual(countBits(115370965), 15);
-      assert.strictEqual(countBits(31), 5);
-      assert.strictEqual(countBits(417862), 7);
-      assert.strictEqual(countBits(626031), 12);
-      assert.strictEqual(countBits(89), 4);
-      assert.strictEqual(countBits(674259), 10);
-      })
+        assert.strictEqual(countBits(0), 0);
+        assert.strictEqual(countBits(4), 1);
+        assert.strictEqual(countBits(7), 3);
+        assert.strictEqual(countBits(9), 2);
+        assert.strictEqual(countBits(10), 2);
+        assert.strictEqual(countBits(26), 3);
+        assert.strictEqual(countBits(77231418), 14);
+        assert.strictEqual(countBits(12525589), 11);
+        assert.strictEqual(countBits(3811), 8);
+        assert.strictEqual(countBits(392902058), 17);
+        assert.strictEqual(countBits(1044), 3);
+        assert.strictEqual(countBits(10030245), 10);
+        assert.strictEqual(countBits(183337941), 16);
+        assert.strictEqual(countBits(20478766), 14);
+        assert.strictEqual(countBits(103021), 9);
+        assert.strictEqual(countBits(287), 6);
+        assert.strictEqual(countBits(115370965), 15);
+        assert.strictEqual(countBits(31), 5);
+        assert.strictEqual(countBits(417862), 7);
+        assert.strictEqual(countBits(626031), 12);
+        assert.strictEqual(countBits(89), 4);
+        assert.strictEqual(countBits(674259), 10);
     })
-  
-  describe("Random tests", () => {  
-      
-    function randint(min, max){
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    
-    for(let i = 0; i < 100; i++){
-      let num = randint(0, 10**randint(1, 10))
-      let expected = [...num.toString(2)].reduce((a, b) => a + +b, 0)
-      it(`countBits(${num}) should equal ${expected}`, () => {
-        assert.strictEqual(countBits(num), expected);
-      });
-    }
-  })
+})
 
-  /**
- * groupByVowelStart
- *
- * 
- */
+describe("Random tests", () => {
+
+    function randint(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    for (let i = 0; i < 100; i++) {
+        let num = randint(0, 10 ** randint(1, 10))
+        let expected = [...num.toString(2)].reduce((a, b) => a + +b, 0)
+        it(`countBits(${num}) should equal ${expected}`, () => {
+            assert.strictEqual(countBits(num), expected);
+        });
+    }
+})
+
+/**
+* groupByVowelStart
+*
+* 
+*/
 
 // Simple solution
 
@@ -1714,51 +1714,51 @@ describe("groupByVowelStart", function () {
 
 // Simple solution
 
-function addChain (n){
-    const fn = function(x) {
-      return addChain(n + x);
+function addChain(n) {
+    const fn = function (x) {
+        return addChain(n + x);
     };
-    
-    fn.valueOf = function() {
-      return n;
+
+    fn.valueOf = function () {
+        return n;
     };
-    
+
     return fn;
-  }
+}
 // Tests
 describe("addChain", () => {
-	it("A single call should return the number passed in", () => {
-		assert.equal(addChain(1), 1);
-	});
-	it("several calls", () => {
-		assert.equal(addChain(1)(2), 3);
-		assert.equal(addChain(1)(2)(3), 6);
-		assert.equal(addChain(1)(2)(3)(4), 10);
-		assert.equal(addChain(1)(2)(3)(4)(5), 15);
-	});
-	it("should be able to be mixed with numbers", () => {
-		assert.equal(addChain(1)(2) + 3, 6);
-	});
-	it("Must be able to store values", () => {
-		const a = addChain(1)(2);
-		const b = addChain(3)(4);
-		assert.equal(a, 3);
-		assert.equal(b, 7);
-	});
-	it("Must be able to store curried functions", () => {
-		const a = addChain(1)(2);
-		assert.equal(a, 3);
-		assert.equal(a(3), 6);
-		assert.equal(a, 3);
-	});
-	it("Must be callable with a curried function", () => {
-		const a = addChain(1)(2);
-		const b = addChain(3)(4);
-		assert.equal(a(b), 10);
-		assert.equal(b(a), 10);
-		assert.equal(a, 3);
-		assert.equal(b, 7);
-	});
+    it("A single call should return the number passed in", () => {
+        assert.equal(addChain(1), 1);
+    });
+    it("several calls", () => {
+        assert.equal(addChain(1)(2), 3);
+        assert.equal(addChain(1)(2)(3), 6);
+        assert.equal(addChain(1)(2)(3)(4), 10);
+        assert.equal(addChain(1)(2)(3)(4)(5), 15);
+    });
+    it("should be able to be mixed with numbers", () => {
+        assert.equal(addChain(1)(2) + 3, 6);
+    });
+    it("Must be able to store values", () => {
+        const a = addChain(1)(2);
+        const b = addChain(3)(4);
+        assert.equal(a, 3);
+        assert.equal(b, 7);
+    });
+    it("Must be able to store curried functions", () => {
+        const a = addChain(1)(2);
+        assert.equal(a, 3);
+        assert.equal(a(3), 6);
+        assert.equal(a, 3);
+    });
+    it("Must be callable with a curried function", () => {
+        const a = addChain(1)(2);
+        const b = addChain(3)(4);
+        assert.equal(a(b), 10);
+        assert.equal(b(a), 10);
+        assert.equal(a, 3);
+        assert.equal(b, 7);
+    });
 });
 
 /**
@@ -1781,21 +1781,73 @@ function zeros(n) {
 // Tests
 
 
-describe("Number of trailing zeros of N", function() {
-    it("Should pass random tests", function() {
-      function zerosSol(n) {
-          var count = 0;
-          var x = 5;
-          while (x <= n) {
-              count += ~~(n/x);
-              x *= 5;
-          }
-          return count;
-      }
-    
-      for (let i = 0; i < 100; i++) {
-        let n = Math.floor(Math.random() * 10000000);
-        assert.equal(zeros(n), zerosSol(n), "Testing with n = " + n)
-      }  
+describe("Number of trailing zeros of N", function () {
+    it("Should pass random tests", function () {
+        function zerosSol(n) {
+            var count = 0;
+            var x = 5;
+            while (x <= n) {
+                count += ~~(n / x);
+                x *= 5;
+            }
+            return count;
+        }
+
+        for (let i = 0; i < 100; i++) {
+            let n = Math.floor(Math.random() * 10000000);
+            assert.equal(zeros(n), zerosSol(n), "Testing with n = " + n)
+        }
     });
-  });
+});
+
+/**
+ * Josephus Permutation,
+ * [1,2,3,4,5,6,7] - initial sequence 
+ * [1,2,4,5,6,7] => 3 is counted out and goes into the result [3]
+ * [1,2,4,5,7] => 6 is counted out and goes into the result [3,6] 
+ * [1,4,5,7] => 2 is counted out and goes into the result [3,6,2]
+ * [1,4,5] => 7 is counted out and goes into the result [3,6,2,7]
+ * [1,4] => 5 is counted out and goes into the result [3,6,2,7,5]
+ * [4] => 1 is counted out and goes into the result [3,6,2,7,5,1]
+ * [] => 4 is counted out and goes into the result [3,6,2,7,5,1,4]
+*/
+
+// Simple solution
+function josephus(arr, k) {
+    let result = [];
+    let index = 0;
+
+    while (arr.length > 0) {
+        index = (index + k - 1) % arr.length;
+        result.push(arr.splice(index, 1)[0]);
+    }
+
+    return result;
+}
+// Tests
+
+describe("josephus", function () {
+    const base = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
+
+    function randint(a, b) {
+        return Math.floor(Math.random() * (b - a + 1) + a);
+    }
+
+    function josephusol(items, k) {
+        let i = 0, res = [];
+        while (items.length > 0) {
+            i = (i + k - 1) % items.length;
+            res.push(items[i]);
+            items.splice(i, 1);
+        }
+        return res;
+    }
+
+    for (let i = 0; i < 40; i++) {
+        const testitems = base.slice(0, randint(0, 50));
+        const testk = randint(1, 20);
+        it(`Testing for josephus([${testitems.join(", ")}], ${testk})`, function () {
+            assert.deepEqual(josephus([].concat(testitems), testk), josephusol(testitems, testk));
+        });
+    }
+});

@@ -1851,3 +1851,70 @@ describe("josephus", function () {
         });
     }
 });
+/**
+ * Merged String Checker
+ *
+*/
+
+// Simple solution
+function isMerge(s, part1, part2) {
+    const cache = new Map();
+
+    function helper(i, j, k) {
+        const key = `${i},${j},${k}`;
+        if (cache.has(key)) return cache.get(key);
+
+        if (i === s.length && j === part1.length && k === part2.length) {
+            return true;
+        }
+
+        let valid = false;
+        if (j < part1.length && s[i] === part1[j]) {
+            valid = helper(i + 1, j + 1, k);
+        }
+
+        if (!valid && k < part2.length && s[i] === part2[k]) {
+            valid = helper(i + 1, j, k + 1);
+        }
+
+        cache.set(key, valid);
+        return valid;
+    }
+
+    return helper(0, 0, 0);
+}
+
+
+// Best solution
+
+function isMerge2(s, part1, part2) {
+    return !s ? !(part1 || part2) :
+        s[0] == part1[0] && isMerge(s.slice(1), part1.slice(1), part2) ||
+        s[0] == part2[0] && isMerge(s.slice(1), part1, part2.slice(1));
+}
+// Tests
+
+function doTest(expected, s, part1, part2) {
+    const actual = isMerge(s, part1, part2);
+    const log = `for s = "${s}"\npart1 = "${part1}"\npart2 = "${part2}"\n`;
+    assert.strictEqual(actual, expected, log);
+}
+
+describe("isMerge", function () {
+
+
+    it('can handle bananas', function () {
+        doTest(true, 'Bananas from Bahamas', 'Bahas', 'Bananas from am');
+    });
+    it('can handle extra characters', function () {
+        doTest(false, 'codewars', 'code', 'warss');
+        doTest(false, 'codewars', 'codes', 'wars');
+    });
+
+    it('can handle characters in wrong order', function () {
+        doTest(false, 'codewars', 'code', 'wasr');
+        doTest(false, 'codewars', 'cwdr', 'oeas');
+    });
+
+
+});

@@ -1915,6 +1915,49 @@ describe("isMerge", function () {
         doTest(false, 'codewars', 'code', 'wasr');
         doTest(false, 'codewars', 'cwdr', 'oeas');
     });
-
-
 });
+
+/**
+ * Find the smallest
+ *
+*/
+
+// Simple solution
+
+function smallest(n) {
+    const str = n.toString();
+    let min = n;
+    let from = 0;
+    let to = 0;
+
+    for (let i = 0; i < str.length; i++) {
+        for (let j = 0; j <= str.length; j++) {
+            if (i === j) continue;
+            let chars = str.split('');
+            let digit = chars.splice(i, 1)[0];
+            chars.splice(j, 0, digit);
+
+            let newNum = parseInt(chars.join(''), 10);
+
+            if (newNum < min) {
+                min = newNum;
+                from = i;
+                to = j;
+            }
+        }
+    }
+
+    return [min, from, to];
+}
+// Tests
+function testing(n, res) {
+    assert.deepEqual(smallest(n), res);
+}
+describe("Find the smalles",function() {
+it("smallest",function() {
+    testing(261235, [126235, 2, 0]);
+    testing(209917, [29917, 0, 1]);
+    testing(285365, [238565, 3, 1]);
+    testing(269045, [26945, 3, 0]);
+    testing(296837, [239687, 4, 1]);
+})})

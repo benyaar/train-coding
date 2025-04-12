@@ -1953,11 +1953,37 @@ function smallest(n) {
 function testing(n, res) {
     assert.deepEqual(smallest(n), res);
 }
-describe("Find the smalles",function() {
-it("smallest",function() {
-    testing(261235, [126235, 2, 0]);
-    testing(209917, [29917, 0, 1]);
-    testing(285365, [238565, 3, 1]);
-    testing(269045, [26945, 3, 0]);
-    testing(296837, [239687, 4, 1]);
-})})
+describe("Find the smalles", function () {
+    it("smallest", function () {
+        testing(261235, [126235, 2, 0]);
+        testing(209917, [29917, 0, 1]);
+        testing(285365, [238565, 3, 1]);
+        testing(269045, [26945, 3, 0]);
+        testing(296837, [239687, 4, 1]);
+    })
+})
+
+/**
+ * Find The Parity Outlier
+ *
+*/
+
+// Simple solution
+function findOutlier(integers) {
+    const evens = integers.filter(n => n % 2 === 0);
+    const odds = integers.filter(n => n % 2 !== 0);
+
+    return evens.length === 1 ? evens[0] : odds[0];
+}
+
+
+// Tests
+describe("Find The Parity Outlier", () => {
+    it("Find The Parity Outlier", () => {
+        assert.equal(findOutlier([0, 1, 2]), 1)
+        assert.equal(findOutlier([1, 2, 3]), 2)
+        assert.equal(findOutlier([2, 6, 8, 10, 3]), 3)
+        assert.equal(findOutlier([0, 0, 3, 0, 0]), 3)
+        assert.equal(findOutlier([1, 1, 0, 1, 1]), 0)
+    });
+});

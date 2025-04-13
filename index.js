@@ -1987,3 +1987,40 @@ describe("Find The Parity Outlier", () => {
         assert.equal(findOutlier([1, 1, 0, 1, 1]), 0)
     });
 });
+
+/**
+ * Take a Ten Minutes Walk,
+ *
+*/
+
+// Simple solution
+function isValidWalk(walk) {
+    if (walk.length !== 10) return false;
+  
+    let x = 0;
+    let y = 0;
+  
+    for (let direction of walk) {
+      switch (direction) {
+        case 'n': y++; break;
+        case 's': y--; break;
+        case 'e': x++; break;
+        case 'w': x--; break;
+      }
+    }
+  
+    return x === 0 && y === 0;
+  }
+  
+
+// Tests
+describe("Take a Ten Minutes Walk", () => {
+    it("Take a Ten Minutes Walk", () => {
+      //some test cases for you...
+      assert.isTrue(isValidWalk(['n','s','n','s','n','s','n','s','n','s']), 'should return true');
+      assert.isFalse(isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e']), 'should return false');
+      assert.isFalse(isValidWalk(['w']), 'should return false');
+      assert.isFalse(isValidWalk(['n','n','n','s','n','s','n','s','n','s']), 'should return false');
+  
+    });
+  });

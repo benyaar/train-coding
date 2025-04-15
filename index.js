@@ -1996,31 +1996,59 @@ describe("Find The Parity Outlier", () => {
 // Simple solution
 function isValidWalk(walk) {
     if (walk.length !== 10) return false;
-  
+
     let x = 0;
     let y = 0;
-  
+
     for (let direction of walk) {
-      switch (direction) {
-        case 'n': y++; break;
-        case 's': y--; break;
-        case 'e': x++; break;
-        case 'w': x--; break;
-      }
+        switch (direction) {
+            case 'n': y++; break;
+            case 's': y--; break;
+            case 'e': x++; break;
+            case 'w': x--; break;
+        }
     }
-  
+
     return x === 0 && y === 0;
-  }
-  
+}
+
 
 // Tests
 describe("Take a Ten Minutes Walk", () => {
     it("Take a Ten Minutes Walk", () => {
-      //some test cases for you...
-      assert.isTrue(isValidWalk(['n','s','n','s','n','s','n','s','n','s']), 'should return true');
-      assert.isFalse(isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e']), 'should return false');
-      assert.isFalse(isValidWalk(['w']), 'should return false');
-      assert.isFalse(isValidWalk(['n','n','n','s','n','s','n','s','n','s']), 'should return false');
+        //some test cases for you...
+        assert.isTrue(isValidWalk(['n', 's', 'n', 's', 'n', 's', 'n', 's', 'n', 's']), 'should return true');
+        assert.isFalse(isValidWalk(['w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e']), 'should return false');
+        assert.isFalse(isValidWalk(['w']), 'should return false');
+        assert.isFalse(isValidWalk(['n', 'n', 'n', 's', 'n', 's', 'n', 's', 'n', 's']), 'should return false');
+
+    });
+});
+
+/**
+ * Persistent Bugger
+ *
+*/
+
+// Simple solution
+
+function persistence(num) {
+    let count = 0;
   
+    while (num >= 10) {
+      num = num.toString().split('').reduce((acc, digit) => acc * Number(digit), 1);
+      count++;
+    }
+  
+    return count;
+  }
+  
+// Tests
+describe("Persistent Bugger.", () => {
+    it("Fixed tests", () => {
+      assert.strictEqual(persistence(39),3);
+      assert.strictEqual(persistence(4),0);
+      assert.strictEqual(persistence(25),2);
+      assert.strictEqual(persistence(999),4);
     });
   });

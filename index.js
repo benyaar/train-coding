@@ -2084,3 +2084,34 @@ describe("Persistent Bugger.", () => {
       assert.strictEqual(order(""), "", "empty input should return empty string" )
     });
   });
+
+  /**
+   * Build Tower
+   *
+  */
+  
+  // Simple solution
+  function towerBuilder(n) {
+    const result = [];
+  
+    for (let i = 0; i < n; i++) {
+      const spaces = " ".repeat(n - i - 1);
+      const stars = "*".repeat(2 * i + 1);
+      result.push(spaces + stars + spaces);
+    }
+  
+    return result;
+  }
+  
+  // Best solution
+  
+  
+  // Tests
+  describe(" Build Tower", () => {
+    it("test", () => {
+  assert.deepEqual(towerBuilder(1), ["*"]);
+  assert.deepEqual(towerBuilder(2), [" * ","***"]);
+  assert.deepEqual(towerBuilder(3), ["  *  "," *** ","*****"]);
+    });
+  });
+  

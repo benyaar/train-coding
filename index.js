@@ -2034,84 +2034,126 @@ describe("Take a Ten Minutes Walk", () => {
 
 function persistence(num) {
     let count = 0;
-  
+
     while (num >= 10) {
-      num = num.toString().split('').reduce((acc, digit) => acc * Number(digit), 1);
-      count++;
+        num = num.toString().split('').reduce((acc, digit) => acc * Number(digit), 1);
+        count++;
     }
-  
+
     return count;
-  }
-  
+}
+
 // Tests
 describe("Persistent Bugger.", () => {
     it("Fixed tests", () => {
-      assert.strictEqual(persistence(39),3);
-      assert.strictEqual(persistence(4),0);
-      assert.strictEqual(persistence(25),2);
-      assert.strictEqual(persistence(999),4);
+        assert.strictEqual(persistence(39), 3);
+        assert.strictEqual(persistence(4), 0);
+        assert.strictEqual(persistence(25), 2);
+        assert.strictEqual(persistence(999), 4);
     });
-  });
+});
 
-  /**
-   * Your order, please
-   *
-  */
-  
-  // Simple solution
-  
-  function order(words) {
+/**
+ * Your order, please
+ *
+*/
+
+// Simple solution
+
+function order(words) {
     if (!words) return "";
-  
-    return words
-      .split(" ")
-      .sort((a, b) => {
-        const numA = a.match(/\d/)[0];
-        const numB = b.match(/\d/)[0];
-        return numA - numB;
-      })
-      .join(" ");
-  }
-  
-  // Best solution
-  
-  
-  // Tests
-  describe("Your order, please", () => {
-    it("should work corectly", () => {
-      assert.strictEqual(order("is2 Thi1s T4est 3a"), "Thi1s is2 3a T4est")
-      assert.strictEqual(order("4of Fo1r pe6ople g3ood th5e the2"), "Fo1r the2 g3ood 4of th5e pe6ople")
-      assert.strictEqual(order(""), "", "empty input should return empty string" )
-    });
-  });
 
-  /**
-   * Build Tower
-   *
-  */
-  
-  // Simple solution
-  function towerBuilder(n) {
-    const result = [];
-  
-    for (let i = 0; i < n; i++) {
-      const spaces = " ".repeat(n - i - 1);
-      const stars = "*".repeat(2 * i + 1);
-      result.push(spaces + stars + spaces);
-    }
-  
-    return result;
-  }
-  
-  // Best solution
-  
-  
-  // Tests
-  describe(" Build Tower", () => {
-    it("test", () => {
-  assert.deepEqual(towerBuilder(1), ["*"]);
-  assert.deepEqual(towerBuilder(2), [" * ","***"]);
-  assert.deepEqual(towerBuilder(3), ["  *  "," *** ","*****"]);
+    return words
+        .split(" ")
+        .sort((a, b) => {
+            const numA = a.match(/\d/)[0];
+            const numB = b.match(/\d/)[0];
+            return numA - numB;
+        })
+        .join(" ");
+}
+
+// Best solution
+
+
+// Tests
+describe("Your order, please", () => {
+    it("should work corectly", () => {
+        assert.strictEqual(order("is2 Thi1s T4est 3a"), "Thi1s is2 3a T4est")
+        assert.strictEqual(order("4of Fo1r pe6ople g3ood th5e the2"), "Fo1r the2 g3ood 4of th5e pe6ople")
+        assert.strictEqual(order(""), "", "empty input should return empty string")
     });
-  });
-  
+});
+
+/**
+ * Build Tower
+ *
+*/
+
+// Simple solution
+function towerBuilder(n) {
+    const result = [];
+
+    for (let i = 0; i < n; i++) {
+        const spaces = " ".repeat(n - i - 1);
+        const stars = "*".repeat(2 * i + 1);
+        result.push(spaces + stars + spaces);
+    }
+
+    return result;
+}
+
+// Best solution
+
+
+// Tests
+describe(" Build Tower", () => {
+    it("test", () => {
+        assert.deepEqual(towerBuilder(1), ["*"]);
+        assert.deepEqual(towerBuilder(2), [" * ", "***"]);
+        assert.deepEqual(towerBuilder(3), ["  *  ", " *** ", "*****"]);
+    });
+});
+
+/**
+ * Highest Scoring Word,
+ *
+*/
+
+// Simple solution
+
+
+function high(x) {
+    const dictionary = 'abcdefghijklmnopqrstuvwxyz';
+    let highestScore = 0;
+    let highestWord = '';
+
+    x.split(' ').forEach(word => {
+        let score = 0;
+        for (let letter of word) {
+            score += dictionary.indexOf(letter) + 1;
+        }
+        if (score > highestScore) {
+            highestScore = score;
+            highestWord = word;
+        }
+    });
+
+    return highestWord;
+}
+
+// Tests
+describe("Highest Scoring Word", () => {
+    it("Testing for fixed tests", () => {
+        assert.strictEqual(high('man i need a taxi up to ubud'), 'taxi');
+        assert.strictEqual(high('what time are we climbing up the volcano'), 'volcano');
+        assert.strictEqual(high('take me to semynak'), 'semynak');
+        assert.strictEqual(high('massage yes massage yes massage'), 'massage');
+        assert.strictEqual(high('take two bintang and a dance please'), 'bintang');
+        assert.strictEqual(high('aa b'), 'aa');
+        assert.strictEqual(high('b aa'), 'b');
+        assert.strictEqual(high('bb d'), 'bb');
+        assert.strictEqual(high('d bb'), 'd');
+        assert.strictEqual(high('aaa b'), 'aaa');
+    })
+})

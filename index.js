@@ -2157,3 +2157,25 @@ describe("Highest Scoring Word", () => {
         assert.strictEqual(high('aaa b'), 'aaa');
     })
 })
+/**
+ * Delete occurrences of an element if it occurs more than n times
+ *
+*/
+
+// Simple solution
+function deleteNth(arr, n) {
+    const count = {};
+    return arr.filter(x => {
+        count[x] = (count[x] || 0) + 1;
+        return count[x] <= n;
+    });
+}
+
+// Tests
+describe("Delete occurrences of an element if it occurs more than n times", () => {
+    it("Delete occurrences of an element if it occurs more than n times", () => {
+        assert.sameOrderedMembers(deleteNth([20, 37, 20, 21], 1), [20, 37, 21])
+        assert.sameOrderedMembers(deleteNth([1, 1, 3, 3, 7, 2, 2, 2, 2], 3), [1, 1, 3, 3, 7, 2, 2, 2])
+        assert.sameOrderedMembers(deleteNth([12, 39, 19, 39, 39, 19, 12], 1), [12, 39, 19])
+    });
+});

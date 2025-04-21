@@ -2179,3 +2179,22 @@ describe("Delete occurrences of an element if it occurs more than n times", () =
         assert.sameOrderedMembers(deleteNth([12, 39, 19, 39, 39, 19, 12], 1), [12, 39, 19])
     });
 });
+/**
+ * Count the smiley faces!,
+ *
+*/
+
+// Simple solution
+function countSmileys(arr) {
+    return arr.filter(face => /^[:;][-~]?[)D]$/.test(face)).length;
+}
+
+// Tests
+describe("Count the smiley faces!", function () {
+    it("Example tests", () => {
+        assert.strictEqual(countSmileys([]), 0);
+        assert.strictEqual(countSmileys([':D', ':~)', ';~D', ':)']), 4);
+        assert.strictEqual(countSmileys([':)', ':(', ':D', ':O', ':;']), 2);
+        assert.strictEqual(countSmileys([';]', ':[', ';*', ':$', ';-D']), 1);
+    });
+});

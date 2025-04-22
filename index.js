@@ -2198,3 +2198,30 @@ describe("Count the smiley faces!", function () {
         assert.strictEqual(countSmileys([';]', ':[', ';*', ':$', ';-D']), 1);
     });
 });
+
+/**
+ * Unique In Order
+ *
+*/
+// Simple solution
+function uniqueInOrder(str) {
+    const result = [];
+
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] !== str[i + 1]) {
+            result.push(str[i]);
+        } 
+    }
+    return result
+}
+// Best solution
+
+var uniqueInOrder2=function(iterable){
+    return [...iterable].filter((a, i) => a !== iterable[i-1])
+}
+// Tests
+describe("Unique In Order", () => {
+    it("Unique In Order", () => {
+      assert.deepEqual(uniqueInOrder('AAAABBBCCDAABBB'), ['A','B','C','D','A','B'])
+    });
+  });

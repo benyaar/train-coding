@@ -2210,18 +2210,43 @@ function uniqueInOrder(str) {
     for (let i = 0; i < str.length; i++) {
         if (str[i] !== str[i + 1]) {
             result.push(str[i]);
-        } 
+        }
     }
     return result
 }
 // Best solution
 
-var uniqueInOrder2=function(iterable){
-    return [...iterable].filter((a, i) => a !== iterable[i-1])
+var uniqueInOrder2 = function (iterable) {
+    return [...iterable].filter((a, i) => a !== iterable[i - 1])
 }
 // Tests
 describe("Unique In Order", () => {
     it("Unique In Order", () => {
-      assert.deepEqual(uniqueInOrder('AAAABBBCCDAABBB'), ['A','B','C','D','A','B'])
+        assert.deepEqual(uniqueInOrder('AAAABBBCCDAABBB'), ['A', 'B', 'C', 'D', 'A', 'B'])
+    });
+});
+
+/**
+ * Split Strings
+ *
+*/
+
+// Simple solution
+function splitString(str) {
+    if (str.length === 0) return [];
+    if (str.length === 1) return [str + '_'];
+    return [str.slice(0, 2)].concat(splitString(str.slice(2)));
+}
+
+// Best solution
+function splitString2(s){
+    return (s+"_").match(/.{2}/g)||[]
+ }
+// Tests
+describe("Split Strings", () => {
+    it("Split Strings", () => {
+      assert.deepEqual(splitString("abcdef"), ["ab", "cd", "ef"]);
+      assert.deepEqual(splitString("abcdefg"), ["ab", "cd", "ef", "g_"]);
+      assert.deepEqual(splitString(""), []);
     });
   });

@@ -2285,3 +2285,34 @@ describe("Split Strings", () => {
     });
   });
   
+  /**
+   * Does my number look big in this?
+   *
+  */
+  
+  // Simple solution
+  
+  function narcissistic(value) {
+    const digits = String(value).split('').map(Number);
+    const power = digits.length;
+    const sum = digits.reduce((acc, digit) => acc + Math.pow(digit, power), 0);
+    return sum === value;
+  }
+  // Tests
+  describe( "Does my number look big in this?", function() {
+  
+    function dotest(input, expected) {
+      const actual = narcissistic(input);
+      assert.strictEqual(actual, expected, `Incorrect answer for value=${input}`)
+    }
+    
+    it("Narcissistic numbers", function() {
+      dotest(  7, true);
+      dotest(153, true);
+    });
+    
+    it("Not narcissistic numbers", function() {
+      dotest(122, false);
+      dotest(487, false);
+    });
+  });

@@ -2316,3 +2316,30 @@ describe("Split Strings", () => {
       dotest(487, false);
     });
   });
+
+  /**
+   * Find the unique number
+   *
+  */
+  
+  // Simple solution
+  
+  function findUniq(arr) {
+    arr.sort((a, b) => a - b); 
+    return arr[0] === arr[1] ? arr[arr.length - 1] : arr[0];
+  }
+  
+  // Best solution
+  
+  
+  // Tests
+  describe("Fixed Tests", () => {
+    it ("Basic tests ", () => {
+      assert.strictEqual(findUniq([ 1, 1, 1, 2, 1, 1 ]),2);
+      assert.strictEqual(findUniq([ 0, 0, 0.55, 0, 0 ]),0.55);  
+      assert.strictEqual(findUniq([ 4, 4, 4, 3, 4, 4, 4, 4 ]),3);
+      assert.strictEqual(findUniq([ 5, 5, 5, 5, 4, 5, 5, 5 ]),4);
+      assert.strictEqual(findUniq([ 6, 6, 6, 6, 6, 5, 6, 6 ]),5);
+      assert.strictEqual(findUniq([ 7, 7, 7, 7, 7, 7, 6, 7 ]),6);
+    })
+  })

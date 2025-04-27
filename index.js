@@ -2343,3 +2343,57 @@ describe("Split Strings", () => {
       assert.strictEqual(findUniq([ 7, 7, 7, 7, 7, 7, 6, 7 ]),6);
     })
   })
+
+  /**
+   * Valid Braces
+   *
+  */
+  
+  // Simple solution
+  
+ function validBraces(braces) {
+  const stack = [];
+  const pairs = {
+    ')': '(',
+    ']': '[',
+    '}': '{'
+  };
+
+  for (const char of braces) {
+    if (['(', '[', '{'].includes(char)) {
+      stack.push(char);
+    } else {
+      if (stack.pop() !== pairs[char]) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+}
+  function doTestvalidBraces (braces, expected) {
+	const actual = validBraces(braces);
+	assert.strictEqual(actual, expected, `for braces:\n"${braces}"\n`);
+}
+
+  // Tests
+ describe("Valid Braces", function() {
+  it("sample tests", function() {
+	doTestvalidBraces("()))", false);
+    doTestvalidBraces("()", true);
+    doTestvalidBraces("[]", true);
+    doTestvalidBraces("{}", true);
+    doTestvalidBraces("(){}[]", true);
+    doTestvalidBraces("([{}])", true);
+    doTestvalidBraces("(}", false);
+    doTestvalidBraces("[(])", false);
+    doTestvalidBraces("({})[({})]", true);
+    doTestvalidBraces("(})", false);
+    doTestvalidBraces("(({{[[]]}}))", true);
+    doTestvalidBraces("{}({})[]", true);
+    doTestvalidBraces(")(}{][", false);
+    doTestvalidBraces("())({}}{()][][", false);
+    doTestvalidBraces("(((({{", false);
+    doTestvalidBraces("}}]]))}])", false);
+  });
+}); 

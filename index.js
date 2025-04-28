@@ -2239,161 +2239,188 @@ function splitString(str) {
 }
 
 // Best solution
-function splitString2(s){
-    return (s+"_").match(/.{2}/g)||[]
- }
+function splitString2(s) {
+    return (s + "_").match(/.{2}/g) || []
+}
 // Tests
 describe("Split Strings", () => {
     it("Split Strings", () => {
-      assert.deepEqual(splitString("abcdef"), ["ab", "cd", "ef"]);
-      assert.deepEqual(splitString("abcdefg"), ["ab", "cd", "ef", "g_"]);
-      assert.deepEqual(splitString(""), []);
+        assert.deepEqual(splitString("abcdef"), ["ab", "cd", "ef"]);
+        assert.deepEqual(splitString("abcdefg"), ["ab", "cd", "ef", "g_"]);
+        assert.deepEqual(splitString(""), []);
     });
-  });
-  /**
-   * The Hashtag Generator,
-   *
-  */
-  
-  // Simple solution
-  function generateHashtag(str) {
-    if (!str || str.trim() === '') return false;
-  
-    const result = '#' + str
-      .trim()
-      .split(/\s+/)
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join('');
-  
-    return result.length > 140 ? false : result;
-  }
+});
+/**
+ * The Hashtag Generator,
+ *
+*/
 
-  
-  // Tests
-  describe("The Hashtag Generator", () => {
+// Simple solution
+function generateHashtag(str) {
+    if (!str || str.trim() === '') return false;
+
+    const result = '#' + str
+        .trim()
+        .split(/\s+/)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join('');
+
+    return result.length > 140 ? false : result;
+}
+
+
+// Tests
+describe("The Hashtag Generator", () => {
     it("Sample tests", () => {
-      assert.strictEqual(generateHashtag(""), false, "Expected an empty string to return false")
-      assert.strictEqual(generateHashtag(" ".repeat(200)), false, "Still an empty string")
-      assert.strictEqual(generateHashtag("Do We have A Hashtag"), "#DoWeHaveAHashtag", "Expected a Hashtag (#) at the beginning.")
-      assert.strictEqual(generateHashtag("Codewars"), "#Codewars", "Should handle a single word.")
-      assert.strictEqual(generateHashtag("Codewars Is Nice"), "#CodewarsIsNice", "Should remove spaces.")
-      assert.strictEqual(generateHashtag("Codewars is nice"), "#CodewarsIsNice", "Should capitalize first letters of words.")
-      assert.strictEqual(generateHashtag("code" + " ".repeat(140) + "wars"), "#CodeWars")
-      assert.strictEqual(generateHashtag("Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Cat"), false, "Should return false if the final word is longer than 140 chars.")
-      assert.strictEqual(generateHashtag("a".repeat(139)), "#A" + "a".repeat(138), "Should work")
-      assert.strictEqual(generateHashtag("a".repeat(140)), false, "Too long")
+        assert.strictEqual(generateHashtag(""), false, "Expected an empty string to return false")
+        assert.strictEqual(generateHashtag(" ".repeat(200)), false, "Still an empty string")
+        assert.strictEqual(generateHashtag("Do We have A Hashtag"), "#DoWeHaveAHashtag", "Expected a Hashtag (#) at the beginning.")
+        assert.strictEqual(generateHashtag("Codewars"), "#Codewars", "Should handle a single word.")
+        assert.strictEqual(generateHashtag("Codewars Is Nice"), "#CodewarsIsNice", "Should remove spaces.")
+        assert.strictEqual(generateHashtag("Codewars is nice"), "#CodewarsIsNice", "Should capitalize first letters of words.")
+        assert.strictEqual(generateHashtag("code" + " ".repeat(140) + "wars"), "#CodeWars")
+        assert.strictEqual(generateHashtag("Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Cat"), false, "Should return false if the final word is longer than 140 chars.")
+        assert.strictEqual(generateHashtag("a".repeat(139)), "#A" + "a".repeat(138), "Should work")
+        assert.strictEqual(generateHashtag("a".repeat(140)), false, "Too long")
     });
-  });
-  
-  /**
-   * Does my number look big in this?
-   *
-  */
-  
-  // Simple solution
-  
-  function narcissistic(value) {
+});
+
+/**
+ * Does my number look big in this?
+ *
+*/
+
+// Simple solution
+
+function narcissistic(value) {
     const digits = String(value).split('').map(Number);
     const power = digits.length;
     const sum = digits.reduce((acc, digit) => acc + Math.pow(digit, power), 0);
     return sum === value;
-  }
-  // Tests
-  describe( "Does my number look big in this?", function() {
-  
+}
+// Tests
+describe("Does my number look big in this?", function () {
+
     function dotest(input, expected) {
-      const actual = narcissistic(input);
-      assert.strictEqual(actual, expected, `Incorrect answer for value=${input}`)
+        const actual = narcissistic(input);
+        assert.strictEqual(actual, expected, `Incorrect answer for value=${input}`)
     }
-    
-    it("Narcissistic numbers", function() {
-      dotest(  7, true);
-      dotest(153, true);
-    });
-    
-    it("Not narcissistic numbers", function() {
-      dotest(122, false);
-      dotest(487, false);
-    });
-  });
 
-  /**
-   * Find the unique number
-   *
-  */
-  
-  // Simple solution
-  
-  function findUniq(arr) {
-    arr.sort((a, b) => a - b); 
+    it("Narcissistic numbers", function () {
+        dotest(7, true);
+        dotest(153, true);
+    });
+
+    it("Not narcissistic numbers", function () {
+        dotest(122, false);
+        dotest(487, false);
+    });
+});
+
+/**
+ * Find the unique number
+ *
+*/
+
+// Simple solution
+
+function findUniq(arr) {
+    arr.sort((a, b) => a - b);
     return arr[0] === arr[1] ? arr[arr.length - 1] : arr[0];
-  }
-  
-  // Best solution
-  
-  
-  // Tests
-  describe("Fixed Tests", () => {
-    it ("Basic tests ", () => {
-      assert.strictEqual(findUniq([ 1, 1, 1, 2, 1, 1 ]),2);
-      assert.strictEqual(findUniq([ 0, 0, 0.55, 0, 0 ]),0.55);  
-      assert.strictEqual(findUniq([ 4, 4, 4, 3, 4, 4, 4, 4 ]),3);
-      assert.strictEqual(findUniq([ 5, 5, 5, 5, 4, 5, 5, 5 ]),4);
-      assert.strictEqual(findUniq([ 6, 6, 6, 6, 6, 5, 6, 6 ]),5);
-      assert.strictEqual(findUniq([ 7, 7, 7, 7, 7, 7, 6, 7 ]),6);
+}
+
+// Best solution
+
+
+// Tests
+describe("Fixed Tests", () => {
+    it("Basic tests ", () => {
+        assert.strictEqual(findUniq([1, 1, 1, 2, 1, 1]), 2);
+        assert.strictEqual(findUniq([0, 0, 0.55, 0, 0]), 0.55);
+        assert.strictEqual(findUniq([4, 4, 4, 3, 4, 4, 4, 4]), 3);
+        assert.strictEqual(findUniq([5, 5, 5, 5, 4, 5, 5, 5]), 4);
+        assert.strictEqual(findUniq([6, 6, 6, 6, 6, 5, 6, 6]), 5);
+        assert.strictEqual(findUniq([7, 7, 7, 7, 7, 7, 6, 7]), 6);
     })
-  })
+})
 
-  /**
-   * Valid Braces
-   *
-  */
-  
-  // Simple solution
-  
- function validBraces(braces) {
-  const stack = [];
-  const pairs = {
-    ')': '(',
-    ']': '[',
-    '}': '{'
-  };
+/**
+ * Valid Braces
+ *
+*/
 
-  for (const char of braces) {
-    if (['(', '[', '{'].includes(char)) {
-      stack.push(char);
-    } else {
-      if (stack.pop() !== pairs[char]) {
-        return false;
-      }
+// Simple solution
+
+function validBraces(braces) {
+    const stack = [];
+    const pairs = {
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    };
+
+    for (const char of braces) {
+        if (['(', '[', '{'].includes(char)) {
+            stack.push(char);
+        } else {
+            if (stack.pop() !== pairs[char]) {
+                return false;
+            }
+        }
     }
-  }
 
-  return stack.length === 0;
+    return stack.length === 0;
 }
-  function doTestvalidBraces (braces, expected) {
-	const actual = validBraces(braces);
-	assert.strictEqual(actual, expected, `for braces:\n"${braces}"\n`);
+function doTestvalidBraces(braces, expected) {
+    const actual = validBraces(braces);
+    assert.strictEqual(actual, expected, `for braces:\n"${braces}"\n`);
 }
 
-  // Tests
- describe("Valid Braces", function() {
-  it("sample tests", function() {
-	doTestvalidBraces("()))", false);
-    doTestvalidBraces("()", true);
-    doTestvalidBraces("[]", true);
-    doTestvalidBraces("{}", true);
-    doTestvalidBraces("(){}[]", true);
-    doTestvalidBraces("([{}])", true);
-    doTestvalidBraces("(}", false);
-    doTestvalidBraces("[(])", false);
-    doTestvalidBraces("({})[({})]", true);
-    doTestvalidBraces("(})", false);
-    doTestvalidBraces("(({{[[]]}}))", true);
-    doTestvalidBraces("{}({})[]", true);
-    doTestvalidBraces(")(}{][", false);
-    doTestvalidBraces("())({}}{()][][", false);
-    doTestvalidBraces("(((({{", false);
-    doTestvalidBraces("}}]]))}])", false);
-  });
-}); 
+// Tests
+describe("Valid Braces", function () {
+    it("sample tests", function () {
+        doTestvalidBraces("()))", false);
+        doTestvalidBraces("()", true);
+        doTestvalidBraces("[]", true);
+        doTestvalidBraces("{}", true);
+        doTestvalidBraces("(){}[]", true);
+        doTestvalidBraces("([{}])", true);
+        doTestvalidBraces("(}", false);
+        doTestvalidBraces("[(])", false);
+        doTestvalidBraces("({})[({})]", true);
+        doTestvalidBraces("(})", false);
+        doTestvalidBraces("(({{[[]]}}))", true);
+        doTestvalidBraces("{}({})[]", true);
+        doTestvalidBraces(")(}{][", false);
+        doTestvalidBraces("())({}}{()][][", false);
+        doTestvalidBraces("(((({{", false);
+        doTestvalidBraces("}}]]))}])", false);
+    });
+});
+/**
+ * Find the missing letter,
+ *
+*/
+
+// Simple solution
+function findMissingLetter(array) {
+    for (let i = 0; i < array.length - 1; i++) {
+        const currentCharCode = array[i].charCodeAt(0);
+        const nextCharCode = array[i + 1].charCodeAt(0);
+
+        if (nextCharCode !== currentCharCode + 1) {
+            return String.fromCharCode(currentCharCode + 1);
+        }
+    }
+    return null;
+}
+
+
+
+// Tests
+describe("Find the missing letter,", function () {
+    it("Find the missing letter,", function () {
+        assert.strictEqual(findMissingLetter(['a', 'b', 'c', 'd', 'f']), 'e');
+        assert.strictEqual(findMissingLetter(['O', 'Q', 'R', 'S']), 'P');
+    });
+});

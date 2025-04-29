@@ -2424,3 +2424,52 @@ describe("Find the missing letter,", function () {
         assert.strictEqual(findMissingLetter(['O', 'Q', 'R', 'S']), 'P');
     });
 });
+
+/**
+ * Look and say numbers
+ *
+*/
+
+// Simple solution
+
+function lookAndSay(start, maxIterations) {
+    let current = start;
+    const result = [];
+
+    for (let i = 0; i < maxIterations; i++) {
+        let next = '';
+        let count = 1;
+        let currentChar = current[0];
+
+        for (let j = 1; j < current.length; j++) {
+            if (current[j] === currentChar) {
+                count++;
+            } else {
+                next += count + currentChar;
+                currentChar = current[j];
+                count = 1;
+            }
+        }
+        next += count + currentChar;
+
+        result.push(next);
+        current = next;
+    }
+
+    return result;
+}
+
+// Best solution
+
+
+// Tests
+describe("lookAndSay", function () {
+    it("should pass sample tests", function () {
+        tester('1', 5, ['11', '21', '1211', '111221', '312211']);
+        tester('1259', 5, ['11121519', '311211151119', '13211231153119', '1113122112132115132119', '31131122211211131221151113122119']);
+    });
+
+    function tester(data, len, expected) {
+        assert.deepEqual(lookAndSay(data, len), expected, `Failed for input: "${data}"\n`);
+    }
+});

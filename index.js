@@ -2483,20 +2483,58 @@ describe("lookAndSay", function () {
 function findNb(m) {
     let n = 0;
     let total = 0;
-  
+
     while (total < m) {
-      n++;
-      total += Math.pow(n, 3);
+        n++;
+        total += Math.pow(n, 3);
     }
-  
+
     return total === m ? n : -1;
-  }
+}
 
 // Tests
-it("Build a pile of Cubes",function() {
+it("Build a pile of Cubes", function () {
     assert.strictEqual(findNb(4183059834009), 2022)
     assert.strictEqual(findNb(24723578342962), -1)
     assert.strictEqual(findNb(135440716410000), 4824)
     assert.strictEqual(findNb(40539911473216), 3568)
-  })
+})
+
+/**
+ * Mexican Wave
+ *
+*/
+
+// Simple solution
+
+function wave(str) {
+    const result = [];
   
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === ' ') continue; // пропускаємо пробіли
+      let waved = str.slice(0, i) + str[i].toUpperCase() + str.slice(i + 1);
+      result.push(waved);
+    }
+  
+    return result;
+  }
+  
+// Tests
+describe('Mexican Wave', function () {
+    it("Basic tests", () => {
+        let result = ["Hello", "hEllo", "heLlo", "helLo", "hellO"];
+        assert.deepEqual(wave("hello"), result, "Should return: '" + result + "'");
+
+        result = ["Codewars", "cOdewars", "coDewars", "codEwars", "codeWars", "codewArs", "codewaRs", "codewarS"];
+        assert.deepEqual(wave("codewars"), result, "Should return: '" + result + "'");
+
+        result = [];
+        assert.deepEqual(wave(""), result, "Should return: '" + result + "'");
+
+        result = ["Two words", "tWo words", "twO words", "two Words", "two wOrds", "two woRds", "two worDs", "two wordS"];
+        assert.deepEqual(wave("two words"), result, "Should return: '" + result + "'");
+
+        result = [" Gap ", " gAp ", " gaP "];
+        assert.deepEqual(wave(" gap "), result, "Should return: '" + result + "'");
+    });
+});

@@ -2509,16 +2509,16 @@ it("Build a pile of Cubes", function () {
 
 function wave(str) {
     const result = [];
-  
+
     for (let i = 0; i < str.length; i++) {
-      if (str[i] === ' ') continue; // пропускаємо пробіли
-      let waved = str.slice(0, i) + str[i].toUpperCase() + str.slice(i + 1);
-      result.push(waved);
+        if (str[i] === ' ') continue; // пропускаємо пробіли
+        let waved = str.slice(0, i) + str[i].toUpperCase() + str.slice(i + 1);
+        result.push(waved);
     }
-  
+
     return result;
-  }
-  
+}
+
 // Tests
 describe('Mexican Wave', function () {
     it("Basic tests", () => {
@@ -2536,5 +2536,32 @@ describe('Mexican Wave', function () {
 
         result = [" Gap ", " gAp ", " gaP "];
         assert.deepEqual(wave(" gap "), result, "Should return: '" + result + "'");
+    });
+});
+
+/**
+ * What's a Perfect Power anyway?
+ *
+*/
+
+// Simple solution
+
+function isPP(n) {
+    for (let m = 2; m * m <= n; m++) {
+        let k = Math.round(Math.log(n) / Math.log(m));
+        if (Math.pow(m, k) === n) {
+            return [m, k];
+        }
+    }
+    return null;
+}
+
+
+// Tests
+describe("perfect powers", function () {
+    it("should work for some examples", function () {
+        assert.deepEqual(isPP(4), [2, 2], "4 = 2^2");
+        assert.deepEqual(isPP(9), [3, 2], "9 = 3^2");
+        assert.strictEqual(isPP(5), null, "5 isn't a perfect number");
     });
 });

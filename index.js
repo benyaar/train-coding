@@ -2565,3 +2565,29 @@ describe("perfect powers", function () {
         assert.strictEqual(isPP(5), null, "5 isn't a perfect number");
     });
 });
+
+/**
+ * Josephus Survivor
+ *
+*/
+
+// Simple solution
+function josephusSurvivor(n, k) {
+    let survivor = 0;
+    for (let i = 2; i <= n; i++) {
+        survivor = (survivor + k) % i;
+    }
+    return survivor + 1;
+}
+
+
+// Tests
+describe("Josephus Survivor", function () {
+    it("should pass example test cases", function () {
+        assert.strictEqual(josephusSurvivor(7, 3), 4);
+        assert.strictEqual(josephusSurvivor(11, 19), 10);
+        assert.strictEqual(josephusSurvivor(1, 300), 1);
+        assert.strictEqual(josephusSurvivor(14, 2), 13);
+        assert.strictEqual(josephusSurvivor(100, 1), 100);
+    });
+});

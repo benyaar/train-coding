@@ -2697,3 +2697,42 @@ describe("Mean Square Error", () => {
         assert.strictEqual(meanSquare([0, -1], [-1, 0]), 1)
     });
 });
+
+/**
+ * The Supermarket Queue
+ *
+*/
+
+// Simple solution
+
+function queueTime(customers, n) {
+  const tills = new Array(n).fill(0);
+  
+  for (const time of customers) {
+    const idx = tills.indexOf(Math.min(...tills));
+    tills[idx] += time;
+  }
+
+  return Math.max(...tills);
+}
+// Best solution
+
+
+// Tests
+describe("The Supermarket Queue", function() {
+  
+  it("Simple tests", () => {
+    assert.strictEqual(queueTime([], 1), 0);
+    assert.strictEqual(queueTime([1,2,3,4], 1), 10);
+    assert.strictEqual(queueTime([2,2,3,3,4,4], 2), 9);
+    assert.strictEqual(queueTime([1,2,3,4,5], 100), 5);
+  });
+
+  it("Examples", () => {
+    assert.strictEqual(queueTime([5,3,4],    1), 12);
+    assert.strictEqual(queueTime([10,2,3,3], 2), 10);
+    assert.strictEqual(queueTime([2,3,10,2], 2), 12);
+  });
+  
+  //add some more example tests here, if you like
+});

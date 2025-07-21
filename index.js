@@ -2736,3 +2736,42 @@ describe("The Supermarket Queue", function() {
   
   //add some more example tests here, if you like
 });
+
+/**
+ * Give me a Diamond
+ *
+*/
+
+// Simple solution
+
+function diamond(n) {
+  if (n <= 0 || n % 2 === 0) return null;
+
+  let result = '';
+
+  const mid = Math.floor(n / 2);
+
+  for (let i = 0; i < n; i++) {
+    const stars = n - Math.abs(mid - i) * 2;
+    const spaces = Math.abs(mid - i);
+    result += ' '.repeat(spaces) + '*'.repeat(stars) + '\n';
+  }
+
+  return result;
+}
+
+// Tests
+describe( "diamond()", function(){
+
+  it("Valid diamonds", () => {
+    assert.strictEqual(diamond(1), "*\n")
+    assert.strictEqual(diamond(3), " *\n***\n *\n")
+    assert.strictEqual(diamond(5), "  *\n ***\n*****\n ***\n  *\n")
+  });
+  
+  it("Invalid diamonds", () => {
+    assert.strictEqual(diamond(2), null)
+    assert.strictEqual(diamond(-3), null)
+    assert.strictEqual(diamond(0), null)
+  });
+});

@@ -2872,3 +2872,28 @@ describe("digPow", () => {
     assert.strictEqual(digPow(92, 1), -1, `Incorrect answer for digPow(92, 1)`);
   });
 })
+/**
+ * Are they the "same"?
+ *
+*/
+
+// Simple solution
+function comp(a1, a2) {
+  if (!Array.isArray(a1) || !Array.isArray(a2)) return false;
+  if (a1.length !== a2.length) return false;
+
+  let sorted1 = a1.map(x => x * x).sort((a, b) => a - b);
+  let sorted2 = [...a2].sort((a, b) => a - b);
+
+  return sorted1.every((val, idx) => val === sorted2[idx]);
+}
+
+
+// Tests
+describe("Tests", () => {
+  it("test", () => {
+    let a1 = [121, 144, 19, 161, 19, 144, 19, 11];
+    let a2 = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
+    assert.isTrue(comp(a1, a2));
+  });
+});

@@ -2897,3 +2897,42 @@ describe("Tests", () => {
     assert.isTrue(comp(a1, a2));
   });
 });
+
+
+/**
+ *WeIrD StRiNg CaSe,
+ *
+*/
+
+// Simple solution
+
+function toWeirdCase(str) {
+  return str
+    .split(" ")
+    .map(word =>
+      word
+        .split("")
+        .map((ch, i) => (i % 2 === 0 ? ch.toUpperCase() : ch.toLowerCase()))
+        .join("")
+    )
+    .join(" ");
+}
+
+
+// Tests
+describe('WeIrD StRiNg CaSe', function() {
+
+    function doTest(input, expected) {
+        const actual = toWeirdCase(input);
+        const message = `for ${JSON.stringify(input)}\n`;
+        assert.strictEqual(actual, expected, message);
+    }
+
+    it('Sample Tests', function() {
+        doTest('This is a test', 'ThIs Is A TeSt');
+        doTest('', '');
+        doTest('unique', 'UnIqUe');
+        doTest('UPPER CASE', 'UpPeR CaSe');
+        doTest('lower case', 'LoWeR CaSe');
+    });
+});

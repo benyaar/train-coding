@@ -2846,3 +2846,29 @@ describe("Stop gninnipS My sdroW!",()=>{
     assert.strictEqual(spinWords("Seriously this is the last one"), "ylsuoireS this is the last one");
   });
 });
+
+/**
+ * Playing with digits,
+ *
+*/
+
+// Simple solution
+
+function digPow(n, p) {
+
+  const digits = String(n).split('').map(Number);
+ 
+  const sum = digits.reduce((acc, d, i) => acc + Math.pow(d, p + i), 0);
+
+  return sum % n === 0 ? sum / n : -1;
+}
+// Tests
+describe("digPow", () => {
+  it("digPow(89, 1) should return 1", () => {
+    assert.strictEqual(digPow(89, 1), 1, `Incorrect answer for digPow(89, 1)`);
+  });
+
+  it("digPow(92, 1) should return -1", () => {
+    assert.strictEqual(digPow(92, 1), -1, `Incorrect answer for digPow(92, 1)`);
+  });
+})

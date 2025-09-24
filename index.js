@@ -2983,3 +2983,38 @@ describe("Two Sum", function () {
     doTest([2, 3, 1], 3);
   })
 });
+
+/**
+ * Rectangle into Squares,
+ *
+*/
+
+// Simple solution
+
+function sqInRect(lng, wdth) {
+  if (lng === wdth) return null; 
+
+  const result = [];
+  
+  while (lng > 0 && wdth > 0) {
+    if (lng > wdth) {
+      result.push(wdth);
+      lng -= wdth;
+    } else {
+      result.push(lng);
+      wdth -= lng;
+    }
+  }
+
+  return result;
+}
+
+// Tests
+describe("Rectangle into Squares",function(){
+  it("Rectangle into Squares",function(){
+    assert.deepEqual(sqInRect(5, 5), null)
+    assert.deepEqual(sqInRect(5, 3), [3, 2, 1, 1])
+    assert.deepEqual(sqInRect(3, 5), [3, 2, 1, 1])
+    assert.deepEqual(sqInRect(20, 14), [14, 6, 6, 2, 2, 2])
+  })
+});

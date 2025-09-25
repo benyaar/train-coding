@@ -3018,3 +3018,42 @@ describe("Rectangle into Squares",function(){
     assert.deepEqual(sqInRect(20, 14), [14, 6, 6, 2, 2, 2])
   })
 });
+
+
+/**
+ * Title Case
+ *
+*/
+
+// Simple solution
+function titleCase(title, minorWords) {
+  if (!title) return "";
+
+  const minor = (minorWords || "")
+    .toLowerCase()
+    .split(" ")
+    .filter(Boolean);
+
+  return title
+    .toLowerCase()
+    .split(" ")
+    .map((word, i) => {
+      if (i === 0 || !minor.includes(word)) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      return word;
+    })
+    .join(" ");
+}
+
+
+// Tests
+
+describe("Title Case", () => {
+  it("Title Case", () => {
+    assert.equal(titleCase(''), '')
+    assert.equal(titleCase('a clash of KINGS', 'a an the of'), 'A Clash of Kings')
+    assert.equal(titleCase('THE WIND IN THE WILLOWS', 'The In'), 'The Wind in the Willows')
+    assert.equal(titleCase('the quick brown fox'), 'The Quick Brown Fox')
+  });
+});

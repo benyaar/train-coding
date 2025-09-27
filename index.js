@@ -3080,3 +3080,41 @@ describe("Sort the odd", () => {
     assert.deepEqual(sortArray([]),[]);
   });
 });
+/**
+ * 
+Good vs Evil
+ *
+*/
+
+// Simple solution
+function goodVsEvil(good, evil) {
+  const goodWorth = [1, 2, 3, 3, 4, 10];
+  const evilWorth = [1, 2, 2, 2, 3, 5, 10];
+
+  const goodArr = good.split(" ").map(Number);
+  const evilArr = evil.split(" ").map(Number);
+
+  const goodTotal = goodArr.reduce((sum, count, i) => sum + count * goodWorth[i], 0);
+  const evilTotal = evilArr.reduce((sum, count, i) => sum + count * evilWorth[i], 0);
+
+  if (goodTotal > evilTotal) {
+    return "Battle Result: Good triumphs over Evil";
+  } else if (evilTotal > goodTotal) {
+    return "Battle Result: Evil eradicates all trace of Good";
+  } else {
+    return "Battle Result: No victor on this battle field";
+  }
+}
+
+// Tests
+describe("Good vs Evil", () => {
+  it("Evil wins", () => {
+    assert.equal(goodVsEvil('1 1 1 1 1 1', '1 1 1 1 1 1 1'), 'Battle Result: Evil eradicates all trace of Good');
+  });
+  it("Good wins", () => {
+    assert.equal(goodVsEvil('0 0 0 0 0 10', '0 1 1 1 1 0 0'), 'Battle Result: Good triumphs over Evil');
+  });
+  it("No winner", () => {
+    assert.equal(goodVsEvil('1 0 0 0 0 0', '1 0 0 0 0 0 0'), 'Battle Result: No victor on this battle field');
+  });
+});

@@ -2706,35 +2706,35 @@ describe("Mean Square Error", () => {
 // Simple solution
 
 function queueTime(customers, n) {
-  const tills = new Array(n).fill(0);
-  
-  for (const time of customers) {
-    const idx = tills.indexOf(Math.min(...tills));
-    tills[idx] += time;
-  }
+    const tills = new Array(n).fill(0);
 
-  return Math.max(...tills);
+    for (const time of customers) {
+        const idx = tills.indexOf(Math.min(...tills));
+        tills[idx] += time;
+    }
+
+    return Math.max(...tills);
 }
 // Best solution
 
 
 // Tests
-describe("The Supermarket Queue", function() {
-  
-  it("Simple tests", () => {
-    assert.strictEqual(queueTime([], 1), 0);
-    assert.strictEqual(queueTime([1,2,3,4], 1), 10);
-    assert.strictEqual(queueTime([2,2,3,3,4,4], 2), 9);
-    assert.strictEqual(queueTime([1,2,3,4,5], 100), 5);
-  });
+describe("The Supermarket Queue", function () {
 
-  it("Examples", () => {
-    assert.strictEqual(queueTime([5,3,4],    1), 12);
-    assert.strictEqual(queueTime([10,2,3,3], 2), 10);
-    assert.strictEqual(queueTime([2,3,10,2], 2), 12);
-  });
-  
-  //add some more example tests here, if you like
+    it("Simple tests", () => {
+        assert.strictEqual(queueTime([], 1), 0);
+        assert.strictEqual(queueTime([1, 2, 3, 4], 1), 10);
+        assert.strictEqual(queueTime([2, 2, 3, 3, 4, 4], 2), 9);
+        assert.strictEqual(queueTime([1, 2, 3, 4, 5], 100), 5);
+    });
+
+    it("Examples", () => {
+        assert.strictEqual(queueTime([5, 3, 4], 1), 12);
+        assert.strictEqual(queueTime([10, 2, 3, 3], 2), 10);
+        assert.strictEqual(queueTime([2, 3, 10, 2], 2), 12);
+    });
+
+    //add some more example tests here, if you like
 });
 
 /**
@@ -2745,35 +2745,35 @@ describe("The Supermarket Queue", function() {
 // Simple solution
 
 function diamond(n) {
-  if (n <= 0 || n % 2 === 0) return null;
+    if (n <= 0 || n % 2 === 0) return null;
 
-  let result = '';
+    let result = '';
 
-  const mid = Math.floor(n / 2);
+    const mid = Math.floor(n / 2);
 
-  for (let i = 0; i < n; i++) {
-    const stars = n - Math.abs(mid - i) * 2;
-    const spaces = Math.abs(mid - i);
-    result += ' '.repeat(spaces) + '*'.repeat(stars) + '\n';
-  }
+    for (let i = 0; i < n; i++) {
+        const stars = n - Math.abs(mid - i) * 2;
+        const spaces = Math.abs(mid - i);
+        result += ' '.repeat(spaces) + '*'.repeat(stars) + '\n';
+    }
 
-  return result;
+    return result;
 }
 
 // Tests
-describe( "diamond()", function(){
+describe("diamond()", function () {
 
-  it("Valid diamonds", () => {
-    assert.strictEqual(diamond(1), "*\n")
-    assert.strictEqual(diamond(3), " *\n***\n *\n")
-    assert.strictEqual(diamond(5), "  *\n ***\n*****\n ***\n  *\n")
-  });
-  
-  it("Invalid diamonds", () => {
-    assert.strictEqual(diamond(2), null)
-    assert.strictEqual(diamond(-3), null)
-    assert.strictEqual(diamond(0), null)
-  });
+    it("Valid diamonds", () => {
+        assert.strictEqual(diamond(1), "*\n")
+        assert.strictEqual(diamond(3), " *\n***\n *\n")
+        assert.strictEqual(diamond(5), "  *\n ***\n*****\n ***\n  *\n")
+    });
+
+    it("Invalid diamonds", () => {
+        assert.strictEqual(diamond(2), null)
+        assert.strictEqual(diamond(-3), null)
+        assert.strictEqual(diamond(0), null)
+    });
 });
 
 /**
@@ -2783,41 +2783,41 @@ describe( "diamond()", function(){
 
 // Simple solution
 Array.prototype.square = function () {
-  return this.map(n => n ** 2);
+    return this.map(n => n ** 2);
 };
 
 Array.prototype.cube = function () {
-  return this.map(n => n ** 3);
+    return this.map(n => n ** 3);
 };
 
 Array.prototype.average = function () {
-  return this.length === 0 ? NaN : this.sum() / this.length;
+    return this.length === 0 ? NaN : this.sum() / this.length;
 };
 
 Array.prototype.sum = function () {
-  return this.reduce((acc, val) => acc + val, 0);
+    return this.reduce((acc, val) => acc + val, 0);
 };
 
 Array.prototype.even = function () {
-  return this.filter(n => n % 2 === 0);
+    return this.filter(n => n % 2 === 0);
 };
 
 Array.prototype.odd = function () {
-  return this.filter(n => n % 2 !== 0);
+    return this.filter(n => n % 2 !== 0);
 };
 
 
 // Tests
 describe("Array Helpers", () => {
-  it("Array Helpers", () => {
-    const numbers = [1, 2, 3, 4, 5];
-    assert.deepEqual(numbers.square(), [1, 4, 9, 16, 25]);
-    assert.deepEqual(numbers.cube(), [1, 8, 27, 64, 125]);
-    assert.strictEqual(numbers.sum(), 15, 'Wrong sum');
-    assert.strictEqual(numbers.average(), 3, 'Wrong average');
-    assert.deepEqual(numbers.even(), [2, 4], 'Wrong result for even()');
-    assert.deepEqual(numbers.odd(), [1, 3, 5], 'Wrong result for odd()');
-  });
+    it("Array Helpers", () => {
+        const numbers = [1, 2, 3, 4, 5];
+        assert.deepEqual(numbers.square(), [1, 4, 9, 16, 25]);
+        assert.deepEqual(numbers.cube(), [1, 8, 27, 64, 125]);
+        assert.strictEqual(numbers.sum(), 15, 'Wrong sum');
+        assert.strictEqual(numbers.average(), 3, 'Wrong average');
+        assert.deepEqual(numbers.even(), [2, 4], 'Wrong result for even()');
+        assert.deepEqual(numbers.odd(), [1, 3, 5], 'Wrong result for odd()');
+    });
 });
 
 /**
@@ -2828,23 +2828,23 @@ describe("Array Helpers", () => {
 // Simple solution
 
 function spinWords(sentence) {
-  return sentence
-    .split(' ')
-    .map(word => word.length >= 5 ? word.split('').reverse().join('') : word)
-    .join(' ');
+    return sentence
+        .split(' ')
+        .map(word => word.length >= 5 ? word.split('').reverse().join('') : word)
+        .join(' ');
 }
 
 // Tests
-describe("Stop gninnipS My sdroW!",()=>{
-  it("Stop gninnipS My sdroW!",()=>{
-    assert.strictEqual(spinWords("Welcome"), "emocleW");
-    assert.strictEqual(spinWords("Hey fellow warriors"), "Hey wollef sroirraw");
-    assert.strictEqual(spinWords("This is a test"), "This is a test");
-    assert.strictEqual(spinWords("This is another test"), "This is rehtona test");
-    assert.strictEqual(spinWords("You are almost to the last test"), "You are tsomla to the last test");
-    assert.strictEqual(spinWords("Just kidding there is still one more"), "Just gniddik ereht is llits one more");
-    assert.strictEqual(spinWords("Seriously this is the last one"), "ylsuoireS this is the last one");
-  });
+describe("Stop gninnipS My sdroW!", () => {
+    it("Stop gninnipS My sdroW!", () => {
+        assert.strictEqual(spinWords("Welcome"), "emocleW");
+        assert.strictEqual(spinWords("Hey fellow warriors"), "Hey wollef sroirraw");
+        assert.strictEqual(spinWords("This is a test"), "This is a test");
+        assert.strictEqual(spinWords("This is another test"), "This is rehtona test");
+        assert.strictEqual(spinWords("You are almost to the last test"), "You are tsomla to the last test");
+        assert.strictEqual(spinWords("Just kidding there is still one more"), "Just gniddik ereht is llits one more");
+        assert.strictEqual(spinWords("Seriously this is the last one"), "ylsuoireS this is the last one");
+    });
 });
 
 /**
@@ -2856,21 +2856,21 @@ describe("Stop gninnipS My sdroW!",()=>{
 
 function digPow(n, p) {
 
-  const digits = String(n).split('').map(Number);
- 
-  const sum = digits.reduce((acc, d, i) => acc + Math.pow(d, p + i), 0);
+    const digits = String(n).split('').map(Number);
 
-  return sum % n === 0 ? sum / n : -1;
+    const sum = digits.reduce((acc, d, i) => acc + Math.pow(d, p + i), 0);
+
+    return sum % n === 0 ? sum / n : -1;
 }
 // Tests
 describe("digPow", () => {
-  it("digPow(89, 1) should return 1", () => {
-    assert.strictEqual(digPow(89, 1), 1, `Incorrect answer for digPow(89, 1)`);
-  });
+    it("digPow(89, 1) should return 1", () => {
+        assert.strictEqual(digPow(89, 1), 1, `Incorrect answer for digPow(89, 1)`);
+    });
 
-  it("digPow(92, 1) should return -1", () => {
-    assert.strictEqual(digPow(92, 1), -1, `Incorrect answer for digPow(92, 1)`);
-  });
+    it("digPow(92, 1) should return -1", () => {
+        assert.strictEqual(digPow(92, 1), -1, `Incorrect answer for digPow(92, 1)`);
+    });
 })
 /**
  * Are they the "same"?
@@ -2879,23 +2879,23 @@ describe("digPow", () => {
 
 // Simple solution
 function comp(a1, a2) {
-  if (!Array.isArray(a1) || !Array.isArray(a2)) return false;
-  if (a1.length !== a2.length) return false;
+    if (!Array.isArray(a1) || !Array.isArray(a2)) return false;
+    if (a1.length !== a2.length) return false;
 
-  let sorted1 = a1.map(x => x * x).sort((a, b) => a - b);
-  let sorted2 = [...a2].sort((a, b) => a - b);
+    let sorted1 = a1.map(x => x * x).sort((a, b) => a - b);
+    let sorted2 = [...a2].sort((a, b) => a - b);
 
-  return sorted1.every((val, idx) => val === sorted2[idx]);
+    return sorted1.every((val, idx) => val === sorted2[idx]);
 }
 
 
 // Tests
 describe("Tests", () => {
-  it("test", () => {
-    let a1 = [121, 144, 19, 161, 19, 144, 19, 11];
-    let a2 = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19];
-    assert.isTrue(comp(a1, a2));
-  });
+    it("test", () => {
+        let a1 = [121, 144, 19, 161, 19, 144, 19, 11];
+        let a2 = [11 * 11, 121 * 121, 144 * 144, 19 * 19, 161 * 161, 19 * 19, 144 * 144, 19 * 19];
+        assert.isTrue(comp(a1, a2));
+    });
 });
 
 
@@ -2907,20 +2907,20 @@ describe("Tests", () => {
 // Simple solution
 
 function toWeirdCase(str) {
-  return str
-    .split(" ")
-    .map(word =>
-      word
-        .split("")
-        .map((ch, i) => (i % 2 === 0 ? ch.toUpperCase() : ch.toLowerCase()))
-        .join("")
-    )
-    .join(" ");
+    return str
+        .split(" ")
+        .map(word =>
+            word
+                .split("")
+                .map((ch, i) => (i % 2 === 0 ? ch.toUpperCase() : ch.toLowerCase()))
+                .join("")
+        )
+        .join(" ");
 }
 
 
 // Tests
-describe('WeIrD StRiNg CaSe', function() {
+describe('WeIrD StRiNg CaSe', function () {
 
     function doTest(input, expected) {
         const actual = toWeirdCase(input);
@@ -2928,7 +2928,7 @@ describe('WeIrD StRiNg CaSe', function() {
         assert.strictEqual(actual, expected, message);
     }
 
-    it('Sample Tests', function() {
+    it('Sample Tests', function () {
         doTest('This is a test', 'ThIs Is A TeSt');
         doTest('', '');
         doTest('unique', 'UnIqUe');
@@ -2944,44 +2944,44 @@ describe('WeIrD StRiNg CaSe', function() {
 
 // Simple solution
 function twoSum(numbers, target) {
-  const seen = new Map(); 
+    const seen = new Map();
 
-  for (let i = 0; i < numbers.length; i++) {
-    const complement = target - numbers[i];
+    for (let i = 0; i < numbers.length; i++) {
+        const complement = target - numbers[i];
 
-    if (seen.has(complement)) {
-      return [seen.get(complement), i];
+        if (seen.has(complement)) {
+            return [seen.get(complement), i];
+        }
+
+        seen.set(numbers[i], i);
     }
 
-    seen.set(numbers[i], i);
-  }
-  
-  return null; 
+    return null;
 }
 // Tests
 describe("Two Sum", function () {
 
-  function doTest(numbers, targetSum) {
-    const [idx0, idx1] = twoSum(numbers.slice(), targetSum);
-    const num0 = numbers[idx0], num1 = numbers[idx1], actSum = num0 + num1;
+    function doTest(numbers, targetSum) {
+        const [idx0, idx1] = twoSum(numbers.slice(), targetSum);
+        const num0 = numbers[idx0], num1 = numbers[idx1], actSum = num0 + num1;
 
-    const message = `for target sum = ${targetSum} and numbers = [${numbers.join(', ')}]\n`;
+        const message = `for target sum = ${targetSum} and numbers = [${numbers.join(', ')}]\n`;
 
-    assert.notEqual(idx0, idx1,
-      message + `the two indices must be different, but got [${[idx0, idx1]}]\n`
-    );
-    assert.strictEqual(actSum, targetSum,
-      message + `array[${idx0}] = ${num0}, array[${idx1}] = ${num1}\n` +
-      `${num0} + ${num1} = ${actSum}\n`
-    );
-  }
+        assert.notEqual(idx0, idx1,
+            message + `the two indices must be different, but got [${[idx0, idx1]}]\n`
+        );
+        assert.strictEqual(actSum, targetSum,
+            message + `array[${idx0}] = ${num0}, array[${idx1}] = ${num1}\n` +
+            `${num0} + ${num1} = ${actSum}\n`
+        );
+    }
 
-  it('Sample Tests', function () {
-    doTest([1, 2, 3], 4);
-    doTest([1234, 5678, 9012], 14690);
-    doTest([2, 2, 3], 4);
-    doTest([2, 3, 1], 3);
-  })
+    it('Sample Tests', function () {
+        doTest([1, 2, 3], 4);
+        doTest([1234, 5678, 9012], 14690);
+        doTest([2, 2, 3], 4);
+        doTest([2, 3, 1], 3);
+    })
 });
 
 /**
@@ -2992,31 +2992,31 @@ describe("Two Sum", function () {
 // Simple solution
 
 function sqInRect(lng, wdth) {
-  if (lng === wdth) return null; 
+    if (lng === wdth) return null;
 
-  const result = [];
-  
-  while (lng > 0 && wdth > 0) {
-    if (lng > wdth) {
-      result.push(wdth);
-      lng -= wdth;
-    } else {
-      result.push(lng);
-      wdth -= lng;
+    const result = [];
+
+    while (lng > 0 && wdth > 0) {
+        if (lng > wdth) {
+            result.push(wdth);
+            lng -= wdth;
+        } else {
+            result.push(lng);
+            wdth -= lng;
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 // Tests
-describe("Rectangle into Squares",function(){
-  it("Rectangle into Squares",function(){
-    assert.deepEqual(sqInRect(5, 5), null)
-    assert.deepEqual(sqInRect(5, 3), [3, 2, 1, 1])
-    assert.deepEqual(sqInRect(3, 5), [3, 2, 1, 1])
-    assert.deepEqual(sqInRect(20, 14), [14, 6, 6, 2, 2, 2])
-  })
+describe("Rectangle into Squares", function () {
+    it("Rectangle into Squares", function () {
+        assert.deepEqual(sqInRect(5, 5), null)
+        assert.deepEqual(sqInRect(5, 3), [3, 2, 1, 1])
+        assert.deepEqual(sqInRect(3, 5), [3, 2, 1, 1])
+        assert.deepEqual(sqInRect(20, 14), [14, 6, 6, 2, 2, 2])
+    })
 });
 
 
@@ -3027,35 +3027,35 @@ describe("Rectangle into Squares",function(){
 
 // Simple solution
 function titleCase(title, minorWords) {
-  if (!title) return "";
+    if (!title) return "";
 
-  const minor = (minorWords || "")
-    .toLowerCase()
-    .split(" ")
-    .filter(Boolean);
+    const minor = (minorWords || "")
+        .toLowerCase()
+        .split(" ")
+        .filter(Boolean);
 
-  return title
-    .toLowerCase()
-    .split(" ")
-    .map((word, i) => {
-      if (i === 0 || !minor.includes(word)) {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      }
-      return word;
-    })
-    .join(" ");
+    return title
+        .toLowerCase()
+        .split(" ")
+        .map((word, i) => {
+            if (i === 0 || !minor.includes(word)) {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }
+            return word;
+        })
+        .join(" ");
 }
 
 
 // Tests
 
 describe("Title Case", () => {
-  it("Title Case", () => {
-    assert.equal(titleCase(''), '')
-    assert.equal(titleCase('a clash of KINGS', 'a an the of'), 'A Clash of Kings')
-    assert.equal(titleCase('THE WIND IN THE WILLOWS', 'The In'), 'The Wind in the Willows')
-    assert.equal(titleCase('the quick brown fox'), 'The Quick Brown Fox')
-  });
+    it("Title Case", () => {
+        assert.equal(titleCase(''), '')
+        assert.equal(titleCase('a clash of KINGS', 'a an the of'), 'A Clash of Kings')
+        assert.equal(titleCase('THE WIND IN THE WILLOWS', 'The In'), 'The Wind in the Willows')
+        assert.equal(titleCase('the quick brown fox'), 'The Quick Brown Fox')
+    });
 });
 
 /**
@@ -3067,18 +3067,18 @@ describe("Title Case", () => {
 
 function sortArray(array) {
 
-  const odds = array.filter(x => x % 2 !== 0).sort((a, b) => a - b);
-  
-  return array.map(x => x % 2 !== 0 ? odds.shift() : x);
+    const odds = array.filter(x => x % 2 !== 0).sort((a, b) => a - b);
+
+    return array.map(x => x % 2 !== 0 ? odds.shift() : x);
 }
 
 // Tests
 describe("Sort the odd", () => {
-  it("Sort the odd", () => {
-    assert.deepEqual(sortArray([5, 3, 2, 8, 1, 4]), [1, 3, 2, 8, 5, 4]);
-    assert.deepEqual(sortArray([5, 3, 1, 8, 0]), [1, 3, 5, 8, 0]);
-    assert.deepEqual(sortArray([]),[]);
-  });
+    it("Sort the odd", () => {
+        assert.deepEqual(sortArray([5, 3, 2, 8, 1, 4]), [1, 3, 2, 8, 5, 4]);
+        assert.deepEqual(sortArray([5, 3, 1, 8, 0]), [1, 3, 5, 8, 0]);
+        assert.deepEqual(sortArray([]), []);
+    });
 });
 /**
  * 
@@ -3088,33 +3088,74 @@ Good vs Evil
 
 // Simple solution
 function goodVsEvil(good, evil) {
-  const goodWorth = [1, 2, 3, 3, 4, 10];
-  const evilWorth = [1, 2, 2, 2, 3, 5, 10];
+    const goodWorth = [1, 2, 3, 3, 4, 10];
+    const evilWorth = [1, 2, 2, 2, 3, 5, 10];
 
-  const goodArr = good.split(" ").map(Number);
-  const evilArr = evil.split(" ").map(Number);
+    const goodArr = good.split(" ").map(Number);
+    const evilArr = evil.split(" ").map(Number);
 
-  const goodTotal = goodArr.reduce((sum, count, i) => sum + count * goodWorth[i], 0);
-  const evilTotal = evilArr.reduce((sum, count, i) => sum + count * evilWorth[i], 0);
+    const goodTotal = goodArr.reduce((sum, count, i) => sum + count * goodWorth[i], 0);
+    const evilTotal = evilArr.reduce((sum, count, i) => sum + count * evilWorth[i], 0);
 
-  if (goodTotal > evilTotal) {
-    return "Battle Result: Good triumphs over Evil";
-  } else if (evilTotal > goodTotal) {
-    return "Battle Result: Evil eradicates all trace of Good";
-  } else {
-    return "Battle Result: No victor on this battle field";
-  }
+    if (goodTotal > evilTotal) {
+        return "Battle Result: Good triumphs over Evil";
+    } else if (evilTotal > goodTotal) {
+        return "Battle Result: Evil eradicates all trace of Good";
+    } else {
+        return "Battle Result: No victor on this battle field";
+    }
 }
 
 // Tests
 describe("Good vs Evil", () => {
-  it("Evil wins", () => {
-    assert.equal(goodVsEvil('1 1 1 1 1 1', '1 1 1 1 1 1 1'), 'Battle Result: Evil eradicates all trace of Good');
-  });
-  it("Good wins", () => {
-    assert.equal(goodVsEvil('0 0 0 0 0 10', '0 1 1 1 1 0 0'), 'Battle Result: Good triumphs over Evil');
-  });
-  it("No winner", () => {
-    assert.equal(goodVsEvil('1 0 0 0 0 0', '1 0 0 0 0 0 0'), 'Battle Result: No victor on this battle field');
-  });
+    it("Evil wins", () => {
+        assert.equal(goodVsEvil('1 1 1 1 1 1', '1 1 1 1 1 1 1'), 'Battle Result: Evil eradicates all trace of Good');
+    });
+    it("Good wins", () => {
+        assert.equal(goodVsEvil('0 0 0 0 0 10', '0 1 1 1 1 0 0'), 'Battle Result: Good triumphs over Evil');
+    });
+    it("No winner", () => {
+        assert.equal(goodVsEvil('1 0 0 0 0 0', '1 0 0 0 0 0 0'), 'Battle Result: No victor on this battle field');
+    });
+});
+
+/**
+ * meeting
+ *
+*/
+
+// Simple solution
+function meeting(s) {
+    return s
+        .toUpperCase()
+        .split(";")
+        .map(name => {
+            let [first, last] = name.split(":");
+            return `(${last}, ${first})`;
+        })
+        .sort()
+        .join("");
+}
+// Tests
+describe("Basic tests", function () {
+    it("meeting test set 1", function () {
+        assert.equal(
+            meeting("Alexis:Wahl;John:Bell;Victoria:Schwarz;Abba:Dorny;Grace:Meta;Ann:Arno;Madison:STAN;Alex:Cornwell;Lewis:Kern;Megan:Stan;Alex:Korn"),
+            "(ARNO, ANN)(BELL, JOHN)(CORNWELL, ALEX)(DORNY, ABBA)(KERN, LEWIS)(KORN, ALEX)(META, GRACE)(SCHWARZ, VICTORIA)(STAN, MADISON)(STAN, MEGAN)(WAHL, ALEXIS)"
+        );
+    });
+
+    it("meeting test set 2", function () {
+        assert.equal(
+            meeting("John:Gates;Michael:Wahl;Megan:Bell;Paul:Dorries;James:Dorny;Lewis:Steve;Alex:Meta;Elizabeth:Russel;Anna:Korn;Ann:Kern;Amber:Cornwell"),
+            "(BELL, MEGAN)(CORNWELL, AMBER)(DORNY, JAMES)(DORRIES, PAUL)(GATES, JOHN)(KERN, ANN)(KORN, ANNA)(META, ALEX)(RUSSEL, ELIZABETH)(STEVE, LEWIS)(WAHL, MICHAEL)"
+        );
+    });
+
+    it("meeting test set 3", function () {
+        assert.equal(
+            meeting("Alex:Arno;Alissa:Cornwell;Sarah:Bell;Andrew:Dorries;Ann:Kern;Haley:Arno;Paul:Dorny;Madison:Kern"),
+            "(ARNO, ALEX)(ARNO, HALEY)(BELL, SARAH)(CORNWELL, ALISSA)(DORNY, PAUL)(DORRIES, ANDREW)(KERN, ANN)(KERN, MADISON)"
+        );
+    });
 });

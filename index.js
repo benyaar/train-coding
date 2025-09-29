@@ -3159,3 +3159,50 @@ describe("Basic tests", function () {
         );
     });
 });
+
+/**
+ * Help the bookseller,
+ *
+*/
+
+// Simple solution
+function stockList(listOfArt, listOfCat) {
+    if (listOfArt.length === 0 || listOfCat.length === 0) return "";
+
+    return listOfCat
+        .map(cat => {
+            const total = listOfArt.reduce((sum, art) => {
+                const [code, qty] = art.split(" ");
+                return code[0] === cat ? sum + Number(qty) : sum;
+            }, 0);
+            return `(${cat} : ${total})`;
+        })
+        .join(" - ");
+}
+
+
+// Tests
+
+describe("StockList", () => {
+    function doTest(books, categories, expected) {
+        assert.strictEqual(
+            stockList(books, categories),
+            expected,
+            `books = ${JSON.stringify(books)}\ncategories = ${JSON.stringify(categories)}`
+        );
+    }
+
+    it("sample tests", () => {
+        doTest(
+            ["BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"],
+            ["A", "B", "C", "D"],
+            "(A : 0) - (B : 1290) - (C : 515) - (D : 600)"
+        );
+
+        doTest(
+            ["ABAR 200", "CDXE 500", "BKWR 250", "BTSQ 890", "DRTY 600"],
+            ["A", "B"],
+            "(A : 200) - (B : 1140)"
+        );
+    });
+});

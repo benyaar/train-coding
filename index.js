@@ -3206,3 +3206,46 @@ describe("StockList", () => {
         );
     });
 });
+
+/**
+ * Enter task name,
+ *
+*/
+
+// Simple solution
+function revrot(str, sz) {
+    if (sz <= 0 || str === "" || sz > str.length) return "";
+
+    const chunks = [];
+    for (let i = 0; i + sz <= str.length; i += sz) {
+        chunks.push(str.slice(i, i + sz));
+    }
+
+    return chunks
+        .map(chunk => {
+            const sumCubes = chunk
+                .split("")
+                .map(d => Math.pow(+d, 3))
+                .reduce((a, b) => a + b, 0);
+
+            if (sumCubes % 2 === 0) {
+                return chunk.split("").reverse().join("");
+            } else {
+                return chunk.slice(1) + chunk[0];
+            }
+        })
+        .join("");
+}
+
+
+// Tests
+describe("revrot", () => {
+    it("basic tests", () => {
+        assert.strictEqual(revrot("1234", 0), "");
+        assert.strictEqual(revrot("", 0), "");
+        assert.strictEqual(revrot("1234", 5), "");
+
+        const s = "733049910872815764";
+        assert.strictEqual(revrot(s, 5), "330479108928157");
+    });
+});

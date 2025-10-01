@@ -3249,3 +3249,39 @@ describe("revrot", () => {
         assert.strictEqual(revrot(s, 5), "330479108928157");
     });
 });
+
+/**
+ * persistence
+ *
+*/
+
+// Simple solution
+
+function persistence(num) {
+  let count = 0;
+  while (num >= 10) {
+    num = num
+      .toString()
+      .split("")
+      .reduce((a, b) => a * b, 1);
+    count++;
+  }
+  return count;
+}
+
+//Tests
+
+describe("Persistent Bugger", () => {
+  it("basic tests", () => {
+    assert.strictEqual(persistence(39), 3);
+    assert.strictEqual(persistence(999), 4);
+    assert.strictEqual(persistence(4), 0);
+  });
+
+  it("more tests", () => {
+    assert.strictEqual(persistence(25), 2);  // 2*5=10 -> 1*0=0
+    assert.strictEqual(persistence(444), 3); // 4*4*4=64 -> 6*4=24 -> 2*4=8
+    assert.strictEqual(persistence(77), 4);  // 7*7=49 -> 4*9=36 -> 3*6=18 -> 1*8=8
+  });
+});
+

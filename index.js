@@ -3285,3 +3285,37 @@ describe("Persistent Bugger", () => {
   });
 });
 
+/**
+ * isValidWalk
+ *
+*/
+
+// Simple solution
+function isValidWalk(walk) {
+  if (walk.length !== 10) return false;
+
+  let x = 0, y = 0;
+  for (let dir of walk) {
+    if (dir === 'n') y++;
+    if (dir === 's') y--;
+    if (dir === 'e') x++;
+    if (dir === 'w') x--;
+  }
+
+  return x === 0 && y === 0;
+}
+
+
+describe("Take a Ten Minute Walk", () => {
+  it("valid walks", () => {
+    assert.strictEqual(isValidWalk(['n','s','n','s','n','s','n','s','n','s']), true);
+    assert.strictEqual(isValidWalk(['e','w','e','w','n','s','n','s','e','w']), true);
+  });
+
+  it("invalid walks", () => {
+    assert.strictEqual(isValidWalk(['w']), false);
+    assert.strictEqual(isValidWalk(['n','s']), false);
+    assert.strictEqual(isValidWalk(['n','n','n','s','n','s','n','s','n','s']), false);
+    assert.strictEqual(isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e']), false);
+  });
+});

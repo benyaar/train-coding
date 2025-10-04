@@ -3350,3 +3350,33 @@ describe("alphabetPosition", () => {
     );
   });
 });
+/**
+ * Detect Pangram
+ *
+*/
+
+// Simple solution
+
+function isPangram(string) {
+  const letters = new Set(
+    string
+      .toLowerCase()
+      .split('')
+      .filter(ch => ch >= 'a' && ch <= 'z')
+  );
+  return letters.size === 26;
+}
+
+// Tests
+
+describe("isPangram", function() {
+  it("Sample Tests", function() {
+    tester("The quick brown fox jumps over the lazy dog.", true);
+    tester("This is not a pangram.", false);
+    tester("abcdefghijklmnopqrstuvwxy .", false);
+  });
+
+  function tester(string, expected) {
+    assert.strictEqual(isPangram(string), expected, `Failed for input: ${JSON.stringify(string)}\n\n`);
+  }
+});
